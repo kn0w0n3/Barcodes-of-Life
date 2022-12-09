@@ -1,2 +1,2 @@
-# Barcodes_of_Life
+# Barcodes of Life
 DNA Barcoding App
