@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BOLD-NG</string>
+    <string name="idntifiers_label">Identifiers</string>
 </resources>

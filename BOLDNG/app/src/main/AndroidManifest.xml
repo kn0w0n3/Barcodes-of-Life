@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BOLDNG">
         <activity
+            android:name=".MainController"
+            android:exported="false" />
+        <activity
+            android:name=".DataInput"
+            android:exported="false"
+            android:label="DataInput" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
