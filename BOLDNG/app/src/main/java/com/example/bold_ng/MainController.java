@@ -21,7 +21,7 @@ public class MainController extends AppCompatActivity {
                 recordDataBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(MainController.this, DataInput.class);
+                        Intent intent = new Intent(MainController.this, RecordData.class);
                         startActivity(intent);
                     }
                 });
