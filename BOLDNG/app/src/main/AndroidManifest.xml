@@ -10,19 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BOLDNG">
         <activity
+            android:name=".SearchData"
+            android:exported="false" />
+        <activity
             android:name=".RecordData"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing"
-
-            />
-
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".MainController"
             android:exported="false" />
-        <activity
-            android:name=".DataInput"
-            android:exported="false"
-            android:label="DataInput" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

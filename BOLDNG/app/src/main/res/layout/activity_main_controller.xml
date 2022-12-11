@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.628" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/searchDataBtn"
         android:layout_width="181dp"
         android:layout_height="93dp"
         android:text="Search Data"
@@ -45,7 +45,7 @@
         android:id="@+id/recordDataBtn"
         android:layout_width="181dp"
         android:layout_height="93dp"
-        android:text="Record Data"
+        android:text="Input Data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
