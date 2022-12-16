@@ -8,3 +8,8 @@ The goal of this project is to provide an interface that will allow users to rec
 https://www.boldsystems.org/  
 
 ![Capture](https://user-images.githubusercontent.com/22214754/206771647-b6a20318-a6cf-4007-8234-765cc29378cd.PNG)  
+
+# **Database:**        
+![sqlitefg](https://user-images.githubusercontent.com/22214754/179894516-3059e142-fb38-40bc-a32c-65500a223eb1.png)    
+https://www.sqlite.org/index.html    
+https://sqlitestudio.pl/  
