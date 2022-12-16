@@ -2,6 +2,7 @@ package com.example.bold_ng;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.telephony.mbms.StreamingServiceInfo;
@@ -89,6 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
         contentValues.put(COL_2, i_sample_id); contentValues.put(COL_3, i_field_id); contentValues.put(COL_4, i_museum_id);
         contentValues.put(COL_5, i_collection_code); contentValues.put(COL_6, i_deposited_in); contentValues.put(COL_7, t_phylum);
         contentValues.put(COL_8, t_class); contentValues.put(COL_9, t_order); contentValues.put(COL_10, t_family);
@@ -108,5 +110,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         else
             return true;
+    }
+
+    //Get all entries in the database
+    public Cursor getAllData(){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME, null);
+        return res;
     }
 }
