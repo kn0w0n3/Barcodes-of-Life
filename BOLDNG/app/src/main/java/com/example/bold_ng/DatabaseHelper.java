@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.telephony.mbms.StreamingServiceInfo;
 
 import androidx.annotation.Nullable;
 
@@ -77,11 +78,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public boolean insertData(String i_sample_id, String i_field_id, String i_museum_id, String i_collection_code, String i_deposited_in, String t_phylum, String t_class,
-                              String t_order, String t_family, String t_subfamily, String t_genus, String t_species, String t_subspecies, String t_bin_id, String s_voucher_status,
-                              String s_tissue_descriptor, String s_brief_note, String s_reproduction, String s_sex, String s_life_stage, String s_detailed_note, String c_country,
-                              String c_province_state, String c_region_country, String c_sector, String c_exact_site, String c_latitude, String c_longitude, String c_cord_source,
-                              String c_cord_accuracy, String c_date_collected, String c_collectors, String c_elevation, String c_elv_accuracy, String c_depth, String c_depth_accuracy){
+    public boolean insertData(String i_sample_id, String i_field_id, String i_museum_id, String i_collection_code,
+                              String i_deposited_in, String t_phylum, String t_class, String t_order, String t_family,
+                              String t_subfamily, String t_genus, String t_species, String t_subspecies, String t_bin_id,
+                              String s_voucher_status, String s_tissue_descriptor, String s_brief_note, String s_reproduction,
+                              String s_sex, String s_life_stage, String s_detailed_note, String c_country, String c_province_state,
+                              String c_region_country, String c_sector, String c_exact_site, String c_latitude, String c_longitude,
+                              String c_cord_source, String c_cord_accuracy, String c_date_collected, String c_collectors, String c_elevation,
+                              String c_elv_accuracy, String c_depth, String c_depth_accuracy) {
+
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, i_sample_id);
@@ -120,9 +125,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_35, c_elv_accuracy);
         contentValues.put(COL_36, c_depth);
         contentValues.put(COL_37, c_depth_accuracy);
+        
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
 
-        if(result == -1)
+        if (result == -1)
             return false;
         else
             return true;

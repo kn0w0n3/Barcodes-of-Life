@@ -557,7 +557,7 @@
             app:layout_constraintTop_toBottomOf="@+id/collectionCodeEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName6"
+            android:id="@+id/phylumEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="49dp"
@@ -571,7 +571,7 @@
             app:layout_constraintTop_toBottomOf="@+id/depositInEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName7"
+            android:id="@+id/classEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -580,13 +580,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName6"
+            app:layout_constraintEnd_toEndOf="@+id/phylumEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName6"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+            app:layout_constraintStart_toStartOf="@+id/phylumEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/phylumEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName8"
+            android:id="@+id/orderEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -595,13 +595,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName7"
+            app:layout_constraintEnd_toEndOf="@+id/classEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName7"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+            app:layout_constraintStart_toStartOf="@+id/classEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/classEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName9"
+            android:id="@+id/familyEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -610,13 +610,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName8"
+            app:layout_constraintEnd_toEndOf="@+id/orderEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName8"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
+            app:layout_constraintStart_toStartOf="@+id/orderEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/orderEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName10"
+            android:id="@+id/subfamilyEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -625,13 +625,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName9"
+            app:layout_constraintEnd_toEndOf="@+id/familyEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName9"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
+            app:layout_constraintStart_toStartOf="@+id/familyEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/familyEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName11"
+            android:id="@+id/genusEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -640,13 +640,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName10"
+            app:layout_constraintEnd_toEndOf="@+id/subfamilyEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName10"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
+            app:layout_constraintStart_toStartOf="@+id/subfamilyEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/subfamilyEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName12"
+            android:id="@+id/speciesEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -655,13 +655,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName11"
+            app:layout_constraintEnd_toEndOf="@+id/genusEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName11" />
+            app:layout_constraintStart_toStartOf="@+id/genusEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/genusEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName13"
+            android:id="@+id/subspeciesEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -670,13 +670,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName12"
+            app:layout_constraintEnd_toEndOf="@+id/speciesEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName12"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
+            app:layout_constraintStart_toStartOf="@+id/speciesEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/speciesEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName14"
+            android:id="@+id/binIdEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -685,13 +685,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName13"
+            app:layout_constraintEnd_toEndOf="@+id/subspeciesEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName13"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName13" />
+            app:layout_constraintStart_toStartOf="@+id/subspeciesEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/subspeciesEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName15"
+            android:id="@+id/voucherStatusEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="50dp"
@@ -700,13 +700,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName14"
+            app:layout_constraintEnd_toEndOf="@+id/binIdEditTxt"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName14"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName14" />
+            app:layout_constraintStart_toStartOf="@+id/binIdEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/binIdEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName16"
+            android:id="@+id/tissueDescriptorEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -715,13 +715,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName15"
+            app:layout_constraintEnd_toEndOf="@+id/voucherStatusEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName15"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName15" />
+            app:layout_constraintStart_toStartOf="@+id/voucherStatusEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/voucherStatusEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName17"
+            android:id="@+id/briefNoteEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -730,13 +730,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName16"
+            app:layout_constraintEnd_toEndOf="@+id/tissueDescriptorEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName16"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName16" />
+            app:layout_constraintStart_toStartOf="@+id/tissueDescriptorEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/tissueDescriptorEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName18"
+            android:id="@+id/reproductionEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -745,13 +745,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName17"
+            app:layout_constraintEnd_toEndOf="@+id/briefNoteEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName17"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName17" />
+            app:layout_constraintStart_toStartOf="@+id/briefNoteEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/briefNoteEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName19"
+            android:id="@+id/sexEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -760,13 +760,13 @@
             android:inputType="textPersonName"
             android:textColor="#FAFAFA"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName18"
+            app:layout_constraintEnd_toEndOf="@+id/reproductionEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName18"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName18" />
+            app:layout_constraintStart_toStartOf="@+id/reproductionEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/reproductionEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName20"
+            android:id="@+id/lifeStageEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -775,13 +775,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName19"
+            app:layout_constraintEnd_toEndOf="@+id/sexEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName19"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName19" />
+            app:layout_constraintStart_toStartOf="@+id/sexEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/sexEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName21"
+            android:id="@+id/detailNoteEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -790,13 +790,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName20"
+            app:layout_constraintEnd_toEndOf="@+id/lifeStageEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName20"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName20" />
+            app:layout_constraintStart_toStartOf="@+id/lifeStageEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/lifeStageEditTxt" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/rd_SaveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="76dp"
@@ -807,7 +807,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/rd_ClearBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -816,11 +816,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.753"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button"
+            app:layout_constraintTop_toTopOf="@+id/rd_SaveBtn"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName22"
+            android:id="@+id/countryEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="47dp"
@@ -829,13 +829,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName21"
+            app:layout_constraintEnd_toEndOf="@+id/detailNoteEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName21"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName21" />
+            app:layout_constraintStart_toStartOf="@+id/detailNoteEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/detailNoteEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName23"
+            android:id="@+id/province_StateEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -844,13 +844,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName22"
+            app:layout_constraintEnd_toEndOf="@+id/countryEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName22"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName22" />
+            app:layout_constraintStart_toStartOf="@+id/countryEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/countryEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName24"
+            android:id="@+id/region_CountryEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -859,13 +859,13 @@
             android:inputType="textPersonName"
             android:textColor="#FBFBFB"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName23"
+            app:layout_constraintEnd_toEndOf="@+id/province_StateEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName23"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName23" />
+            app:layout_constraintStart_toStartOf="@+id/province_StateEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/province_StateEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName25"
+            android:id="@+id/sectorEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -874,13 +874,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName24"
+            app:layout_constraintEnd_toEndOf="@+id/region_CountryEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName24"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName24" />
+            app:layout_constraintStart_toStartOf="@+id/region_CountryEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/region_CountryEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName26"
+            android:id="@+id/exactSiteEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -889,13 +889,13 @@
             android:inputType="textPersonName"
             android:textColor="#FDFDFD"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName25"
+            app:layout_constraintEnd_toEndOf="@+id/sectorEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName25"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName25" />
+            app:layout_constraintStart_toStartOf="@+id/sectorEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/sectorEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName27"
+            android:id="@+id/latitudeEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -904,13 +904,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFEFE"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName26"
+            app:layout_constraintEnd_toEndOf="@+id/exactSiteEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName26"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName26" />
+            app:layout_constraintStart_toStartOf="@+id/exactSiteEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/exactSiteEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName28"
+            android:id="@+id/logitudeEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -919,13 +919,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName27"
+            app:layout_constraintEnd_toEndOf="@+id/latitudeEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName27"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName27" />
+            app:layout_constraintStart_toStartOf="@+id/latitudeEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/latitudeEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName29"
+            android:id="@+id/cordSourceEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -934,13 +934,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName28"
+            app:layout_constraintEnd_toEndOf="@+id/logitudeEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName28"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName28" />
+            app:layout_constraintStart_toStartOf="@+id/logitudeEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/logitudeEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName30"
+            android:id="@+id/cordAccuracyEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -949,13 +949,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName29"
+            app:layout_constraintEnd_toEndOf="@+id/cordSourceEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName29"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName29" />
+            app:layout_constraintStart_toStartOf="@+id/cordSourceEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/cordSourceEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName32"
+            android:id="@+id/elevAccuracyEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -964,13 +964,13 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
+            app:layout_constraintEnd_toEndOf="@+id/elevationEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+            app:layout_constraintStart_toStartOf="@+id/elevationEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/elevationEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName33"
+            android:id="@+id/depthEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -979,13 +979,13 @@
             android:inputType="textPersonName"
             android:textColor="#FBFBFB"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName32"
+            app:layout_constraintEnd_toEndOf="@+id/elevAccuracyEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName32"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName32" />
+            app:layout_constraintStart_toStartOf="@+id/elevAccuracyEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/elevAccuracyEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName34"
+            android:id="@+id/depthAccuracyEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -994,10 +994,10 @@
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName33"
+            app:layout_constraintEnd_toEndOf="@+id/depthEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName33"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName33" />
+            app:layout_constraintStart_toStartOf="@+id/depthEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/depthEditTxt" />
 
         <TextView
             android:id="@+id/textView4"
@@ -1014,7 +1014,7 @@
             app:layout_constraintVertical_bias="0.178" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/dateCollectedEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -1024,13 +1024,13 @@
             android:text=""
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName30"
+            app:layout_constraintEnd_toEndOf="@+id/cordAccuracyEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName30"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName30" />
+            app:layout_constraintStart_toStartOf="@+id/cordAccuracyEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/cordAccuracyEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/collectorsEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -1040,13 +1040,13 @@
             android:text=""
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/dateCollectedEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+            app:layout_constraintStart_toStartOf="@+id/dateCollectedEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/dateCollectedEditTxt" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/elevationEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
@@ -1056,10 +1056,10 @@
             android:text=""
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
+            app:layout_constraintEnd_toEndOf="@+id/collectorsEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintStart_toStartOf="@+id/collectorsEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/collectorsEditTxt" />
 
         <TextView
             android:id="@+id/textView"
