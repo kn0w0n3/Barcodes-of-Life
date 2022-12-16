@@ -89,43 +89,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, i_sample_id);
-        contentValues.put(COL_3, i_field_id);
-        contentValues.put(COL_4, i_museum_id);
-        contentValues.put(COL_5, i_collection_code);
-        contentValues.put(COL_6, i_deposited_in);
-        contentValues.put(COL_7, t_phylum);
-        contentValues.put(COL_8, t_class);
-        contentValues.put(COL_9, t_order);
-        contentValues.put(COL_10, t_family);
-        contentValues.put(COL_11, t_subfamily);
-        contentValues.put(COL_12, t_genus);
-        contentValues.put(COL_13, t_species);
-        contentValues.put(COL_14, t_subspecies);
-        contentValues.put(COL_15, t_bin_id);
-        contentValues.put(COL_16, s_voucher_status);
-        contentValues.put(COL_17, s_tissue_descriptor);
-        contentValues.put(COL_18, s_brief_note);
-        contentValues.put(COL_19, s_reproduction);
-        contentValues.put(COL_20, s_sex);
-        contentValues.put(COL_21, s_life_stage);
-        contentValues.put(COL_22, s_detailed_note);
-        contentValues.put(COL_23, c_country);
-        contentValues.put(COL_24, c_province_state);
-        contentValues.put(COL_25, c_region_country);
-        contentValues.put(COL_26, c_sector);
-        contentValues.put(COL_27, c_exact_site);
-        contentValues.put(COL_28, c_latitude);
-        contentValues.put(COL_29, c_longitude);
-        contentValues.put(COL_30, c_cord_source);
-        contentValues.put(COL_31, c_cord_accuracy);
-        contentValues.put(COL_32, c_date_collected);
-        contentValues.put(COL_33, c_collectors);
-        contentValues.put(COL_34, c_elevation);
-        contentValues.put(COL_35, c_elv_accuracy);
-        contentValues.put(COL_36, c_depth);
-        contentValues.put(COL_37, c_depth_accuracy);
-        
+        contentValues.put(COL_2, i_sample_id); contentValues.put(COL_3, i_field_id); contentValues.put(COL_4, i_museum_id);
+        contentValues.put(COL_5, i_collection_code); contentValues.put(COL_6, i_deposited_in); contentValues.put(COL_7, t_phylum);
+        contentValues.put(COL_8, t_class); contentValues.put(COL_9, t_order); contentValues.put(COL_10, t_family);
+        contentValues.put(COL_11, t_subfamily); contentValues.put(COL_12, t_genus); contentValues.put(COL_13, t_species);
+        contentValues.put(COL_14, t_subspecies); contentValues.put(COL_15, t_bin_id); contentValues.put(COL_16, s_voucher_status);
+        contentValues.put(COL_17, s_tissue_descriptor); contentValues.put(COL_18, s_brief_note); contentValues.put(COL_19, s_reproduction);
+        contentValues.put(COL_20, s_sex); contentValues.put(COL_21, s_life_stage); contentValues.put(COL_22, s_detailed_note);
+        contentValues.put(COL_23, c_country); contentValues.put(COL_24, c_province_state); contentValues.put(COL_25, c_region_country);
+        contentValues.put(COL_26, c_sector); contentValues.put(COL_27, c_exact_site); contentValues.put(COL_28, c_latitude);
+        contentValues.put(COL_29, c_longitude); contentValues.put(COL_30, c_cord_source); contentValues.put(COL_31, c_cord_accuracy);
+        contentValues.put(COL_32, c_date_collected); contentValues.put(COL_33, c_collectors); contentValues.put(COL_34, c_elevation);
+        contentValues.put(COL_35, c_elv_accuracy); contentValues.put(COL_36, c_depth); contentValues.put(COL_37, c_depth_accuracy);
+
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
 
         if (result == -1)

@@ -85,7 +85,7 @@ public class RecordData extends AppCompatActivity {
                                cordAccuracy.getText().toString(), dateCollected.getText().toString(), collectors.getText().toString(), elevation.getText().toString(),
                                elevAccuracy.getText().toString(), depth.getText().toString(), depthAccuracy.getText().toString());
 
-                       if(isInserted == true){
+                       if(isInserted){
                            Toast.makeText(RecordData.this, "Data Inserted", Toast.LENGTH_LONG).show();
                        }
                        else{
