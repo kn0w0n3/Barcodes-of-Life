@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -16,8 +18,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-public class SearchData extends AppCompatActivity {
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.util.ArrayList;
+import java.util.logging.XMLFormatter;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+public class SearchData extends AppCompatActivity {
+    String tempStartTag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,17 +40,18 @@ public class SearchData extends AppCompatActivity {
 
         Button searchBtn1, searchBtn2, searchBtn3;
         EditText et1, et2, et3;
+
         ListView apiListV;
 
-        searchBtn1 = findViewById(R.id.sd_searchBtn);
-        searchBtn2 = findViewById(R.id.sd_searchBtn2);
-        searchBtn3 = findViewById(R.id.sd_searchBtn3);
+        searchBtn1 = (Button) findViewById(R.id.sd_searchBtn);
+        searchBtn2 = (Button) findViewById(R.id.sd_searchBtn2);
+        searchBtn3 = (Button) findViewById(R.id.sd_searchBtn3);
 
-        et1 = findViewById(R.id.sd_SearchEditTxt);
-        et2 = findViewById(R.id.sd_SearchEditTxt2);
-        et3 = findViewById(R.id.sd_SearchEditTxt3);
+        et1 = (EditText) findViewById(R.id.sd_SearchEditTxt);
+        et2 = (EditText) findViewById(R.id.sd_SearchEditTxt2);
+        et3 = (EditText) findViewById(R.id.sd_SearchEditTxt3);
 
-        apiListV = findViewById(R.id.apiListView);
+        //apiListV = (ListView) findViewById(R.id.apiListView);
 
         //CLick listeners for buttons
         searchBtn1.setOnClickListener(new View.OnClickListener() {
@@ -43,8 +59,8 @@ public class SearchData extends AppCompatActivity {
             public void onClick(View view) {
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(SearchData.this);
-                String url = "http://v3.boldsystems.org/index.php/API_Public/specimen?taxon=Aves&geo=Costa%20Rica&format=tsv";
-
+                //String url = "http://v3.boldsystems.org/index.php/API_Public/specimen?taxon=Aves&geo=Costa%20Rica&format=xml";
+                String url = et1.getText().toString();
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {
@@ -52,7 +68,14 @@ public class SearchData extends AppCompatActivity {
                             public void onResponse(String response) {
                                 // Display the first 500 characters of the response string.
                                 //textView.setText("Response is: " + response.substring(0,500));
-                                Toast.makeText(SearchData.this, response, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(SearchData.this, "button 1 clicked", Toast.LENGTH_SHORT).show();
+                                try {
+                                    processParsing(response);
+                                } catch (XmlPullParserException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -80,4 +103,49 @@ public class SearchData extends AppCompatActivity {
             }
         });
     }
+
+    private void processParsing(String r) throws XmlPullParserException, IOException{
+        TextView tV;
+        tV =  (TextView) findViewById(R.id.textView12);
+        
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            XmlPullParser xpp = factory.newPullParser();
+            System.out.println("parser implementation class is "+xpp.getClass());
+
+            xpp.setInput ( new StringReader (r) );
+            int eventType = xpp.getEventType();
+
+            while (eventType != xpp.END_DOCUMENT) {
+
+                if(eventType == xpp.START_DOCUMENT) {
+                    System.out.println("Start document");
+                }
+                else if(eventType == xpp.END_DOCUMENT) {
+                    System.out.println("End document");
+                }
+                else if(eventType == xpp.START_TAG) {
+                    tempStartTag = xpp.getName().toString();
+                    System.out.println("Start tag "+xpp.getName());
+                }
+                else if(eventType == xpp.END_TAG) {
+                    System.out.println("End tag "+xpp.getName());
+                }
+                else if(eventType == xpp.TEXT) {
+                    System.out.println("Text " + xpp.getText());
+                    if(xpp.getText().toString().isEmpty()){
+                        Toast.makeText(SearchData.this, "The text is empty: " , Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else{
+                        tV.append(tempStartTag + " " + xpp.getText());
+                        tempStartTag = "";
+                    }
+                    //Toast.makeText(SearchData.this, "The text is: " + xpp.getText(), Toast.LENGTH_SHORT).show();
+                }
+                eventType = xpp.next();
+            }
+
+    }
+
 }

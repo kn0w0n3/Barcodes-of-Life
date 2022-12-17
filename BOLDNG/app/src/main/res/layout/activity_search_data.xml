@@ -16,6 +16,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
+        android:textIsSelectable="true"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -134,13 +135,34 @@
         app:layout_constraintStart_toEndOf="@+id/sd_searchBtn"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <ListView
-        android:id="@+id/apiListView"
-        android:layout_width="381dp"
-        android:layout_height="375dp"
-        android:layout_marginTop="16dp"
+    <ScrollView
+        android:id="@+id/boldScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Databse Response:"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sd_SearchEditTxt3" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
