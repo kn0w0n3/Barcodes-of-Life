@@ -79,16 +79,16 @@ public class RecordData extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                       boolean isInserted =  inputDatabase.insertData(sampleID.getText().toString(), fieldID.getText().toString(),
-                               museumID.getText().toString(), collectionCode.getText().toString() , depositIn.getText().toString(),
-                               phylum.getText().toString(), classTxt.getText().toString(), order.getText().toString(), family.getText().toString(),
-                               subfamily.getText().toString(), genus.getText().toString(), species.getText().toString(), subspecies.getText().toString(),
-                               binId.getText().toString(), vStatus.getText().toString(), tDescriptor.getText().toString(),  briefNote.getText().toString(),
-                               reproduction.getText().toString(), sex.getText().toString(), lifeStage.getText().toString(), detailedNote.getText().toString(),
-                               country.getText().toString(), province_State.getText().toString(), region_Country.getText().toString(), sector.getText().toString(),
-                               exactSite.getText().toString(), latitude.getText().toString(), longitude.getText().toString(), cordSource.getText().toString(),
-                               cordAccuracy.getText().toString(), dateCollected.getText().toString(), collectors.getText().toString(), elevation.getText().toString(),
-                               elevAccuracy.getText().toString(), depth.getText().toString(), depthAccuracy.getText().toString());
+                       boolean isInserted =  inputDatabase.insertData(sampleID.getText().toString(), fieldID.getText().toString(),museumID.getText().toString(),
+                               collectionCode.getText().toString(), depositIn.getText().toString(), phylum.getText().toString(), subfamily.getText().toString(),
+                               classTxt.getText().toString(), order.getText().toString(), family.getText().toString(), genus.getText().toString(),
+                               species.getText().toString(), subspecies.getText().toString(), binId.getText().toString(), vStatus.getText().toString(),
+                               tDescriptor.getText().toString(), briefNote.getText().toString(),reproduction.getText().toString(), sex.getText().toString(),
+                               lifeStage.getText().toString(), detailedNote.getText().toString(), country.getText().toString(), province_State.getText().toString(),
+                               region_Country.getText().toString(), sector.getText().toString(), exactSite.getText().toString(), latitude.getText().toString(),
+                               longitude.getText().toString(), cordSource.getText().toString(), cordAccuracy.getText().toString(), dateCollected.getText().toString(),
+                               collectors.getText().toString(), elevation.getText().toString(), elevAccuracy.getText().toString(), depth.getText().toString(),
+                               depthAccuracy.getText().toString());
 
                        if(isInserted){
                            Toast.makeText(RecordData.this, "Data Inserted", Toast.LENGTH_LONG).show();
@@ -141,6 +141,7 @@ public class RecordData extends AppCompatActivity {
         );
     }
 
+    //Show database contents
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
