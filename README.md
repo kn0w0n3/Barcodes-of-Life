@@ -1,5 +1,4 @@
-# Barcodes of Life  
-DNA Barcoding App  
+# Barcodes of Life | DNA Barcoding App    
 
 ![BOLD_GUI_12-12-22_C2_5MB](https://user-images.githubusercontent.com/22214754/207253090-c121559e-12ba-49b5-aedd-701ae444f736.gif)      
 
