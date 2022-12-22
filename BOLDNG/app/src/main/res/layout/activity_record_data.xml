@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:paddingBottom="10dp"
+        android:paddingBottom="100dp"
         tools:context=".RecordData">
 
         <TextView
@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="IDENTIFIERS:"
+
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -99,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="TAXONOMY:"
+
             android:textColor="#FDFDFD"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/textView29"
@@ -220,6 +222,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="SPECIMEN DETAILS:"
+
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/textView41"
@@ -315,14 +318,15 @@
             android:id="@+id/textView64"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="COLLECTION DETAILS:"
+
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView62"
-            app:layout_constraintHorizontal_bias="0.279"
-            app:layout_constraintStart_toStartOf="@+id/textView62"
-            app:layout_constraintTop_toBottomOf="@+id/textView62" />
+            app:layout_constraintEnd_toEndOf="@+id/imageButton"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="@+id/imageButton"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
         <TextView
             android:id="@+id/textView65"
@@ -560,7 +564,7 @@
             android:id="@+id/phylumEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
-            android:layout_marginTop="49dp"
+            android:layout_marginTop="48dp"
             android:backgroundTint="@android:color/white"
             android:ems="10"
             android:inputType="textPersonName"
@@ -760,6 +764,7 @@
             android:inputType="textPersonName"
             android:textColor="#FAFAFA"
             android:textSize="12sp"
+
             app:layout_constraintEnd_toEndOf="@+id/reproductionEditTxt"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/reproductionEditTxt"
@@ -797,42 +802,42 @@
 
         <Button
             android:id="@+id/rd_SaveBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="15dp"
             android:text="Save"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.049"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <Button
             android:id="@+id/rd_ClearBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="11dp"
             android:text="Clear"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rd_SaveBtn"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintEnd_toEndOf="@+id/depthAccuracyEditTxt"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/depthAccuracyEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/depthAccuracyEditTxt" />
 
         <EditText
             android:id="@+id/countryEditTxt"
             android:layout_width="247dp"
             android:layout_height="35dp"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="54dp"
             android:backgroundTint="@android:color/white"
             android:ems="10"
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/detailNoteEditTxt"
+            app:layout_constraintEnd_toEndOf="@+id/imgSelectTxtView"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/detailNoteEditTxt"
-            app:layout_constraintTop_toBottomOf="@+id/detailNoteEditTxt" />
+            app:layout_constraintStart_toStartOf="@+id/imgSelectTxtView"
+            app:layout_constraintTop_toBottomOf="@+id/imgSelectTxtView" />
 
         <EditText
             android:id="@+id/province_StateEditTxt"
@@ -1004,6 +1009,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Input Data"
+
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textView18"
@@ -1087,14 +1093,66 @@
 
         <Button
             android:id="@+id/viewDataBtn"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="-13dp"
+            android:layout_marginTop="28dp"
+            android:text="View Data"
+            app:layout_constraintEnd_toEndOf="@+id/depthAccuracyEditTxt"
+            app:layout_constraintHorizontal_bias="0.072"
+            app:layout_constraintStart_toStartOf="@+id/depthAccuracyEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/depthAccuracyEditTxt" />
+
+        <ImageView
+            android:id="@+id/IVPreviewImage"
+            android:layout_width="194dp"
+            android:layout_height="194dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView15"
+            app:layout_constraintHorizontal_bias="0.522"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:text="View Data"
-            app:layout_constraintEnd_toStartOf="@+id/rd_ClearBtn"
-            app:layout_constraintHorizontal_bias="0.523"
-            app:layout_constraintStart_toEndOf="@+id/rd_SaveBtn"
-            app:layout_constraintTop_toBottomOf="@+id/depthAccuracyEditTxt" />
+            android:layout_marginTop="17dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView62"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textView62"
+            app:layout_constraintTop_toBottomOf="@+id/textView62"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <TextView
+            android:id="@+id/imgSelectTxtView"
+            android:layout_width="247dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/box_border"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:text="imagename.png"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/detailNoteEditTxt"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/detailNoteEditTxt"
+            app:layout_constraintTop_toBottomOf="@+id/detailNoteEditTxt" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="104dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/box_border"
+            android:text="Image Preview"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/viewDataBtn"
+            app:layout_constraintHorizontal_bias="0.352"
+            app:layout_constraintStart_toStartOf="@+id/viewDataBtn"
+            app:layout_constraintTop_toBottomOf="@+id/viewDataBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

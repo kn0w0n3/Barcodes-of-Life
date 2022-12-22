@@ -9,6 +9,8 @@ import android.telephony.mbms.StreamingServiceInfo;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Blob;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     public final static String DATABASE_NAME = "specimen_data.db";
     public final static String TABLE_NAME = "user_input_table";
@@ -59,6 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public final static String COL_35 = "c_elv_accuracy";
     public final static String COL_36 = "c_depth";
     public final static String COL_37 = "c_depth_accuracy";
+    public final static String COL_38 = "specimen_image";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -70,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table " + TABLE_NAME +" (id INTEGER PRIMARY KEY AUTOINCREMENT, i_sample_id TEXT, i_field_id TEXT, i_museum_id TEXT, i_collection_code TEXT," +
                 "i_deposited_in TEXT, t_phylum TEXT, t_class TEXT, t_order TEXT, t_family TEXT, t_subfamily TEXT, t_genus TEXT, t_species TEXT, t_subspecies TEXT, t_bin_id TEXT, s_voucher_status TEXT, s_tissue_descriptor TEXT," +
                 " s_brief_note TEXT, s_reproduction TEXT, s_sex TEXT, s_life_stage TEXT, s_detailed_note TEXT, c_country TEXT, c_province_state TEXT, c_region_country TEXT, c_sector TEXT, c_exact_site TEXT, c_latitude TEXT," +
-                "c_longitude TEXT, c_cord_source TEXT, c_cord_accuracy TEXT, c_date_collected TEXT, c_collectors TEXT, c_elevation TEXT, c_elv_accuracy TEXT, c_depth TEXT, c_depth_accuracy TEXT)");
+                "c_longitude TEXT, c_cord_source TEXT, c_cord_accuracy TEXT, c_date_collected TEXT, c_collectors TEXT, c_elevation TEXT, c_elv_accuracy TEXT, c_depth TEXT, c_depth_accuracy TEXT, specimen_image blob)");
     }
 
     @Override
@@ -86,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                               String s_sex, String s_life_stage, String s_detailed_note, String c_country, String c_province_state,
                               String c_region_country, String c_sector, String c_exact_site, String c_latitude, String c_longitude,
                               String c_cord_source, String c_cord_accuracy, String c_date_collected, String c_collectors, String c_elevation,
-                              String c_elv_accuracy, String c_depth, String c_depth_accuracy) {
+                              String c_elv_accuracy, String c_depth, String c_depth_accuracy, byte[] specimen_image) {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -103,6 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_29, c_longitude); contentValues.put(COL_30, c_cord_source); contentValues.put(COL_31, c_cord_accuracy);
         contentValues.put(COL_32, c_date_collected); contentValues.put(COL_33, c_collectors); contentValues.put(COL_34, c_elevation);
         contentValues.put(COL_35, c_elv_accuracy); contentValues.put(COL_36, c_depth); contentValues.put(COL_37, c_depth_accuracy);
+        contentValues.put(COL_38, specimen_image);
 
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
 

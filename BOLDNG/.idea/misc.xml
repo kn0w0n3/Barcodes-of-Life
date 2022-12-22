@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3065" />
         <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/layout/activity_data_input.xml" value="0.33" />
         <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/layout/activity_main_controller.xml" value="0.25" />
-        <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/layout/activity_record_data.xml" value="0.2139654067905189" />
+        <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/layout/activity_record_data.xml" value="0.30296720458094745" />
         <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/layout/activity_search_data.xml" value="0.33" />
         <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/layout/activity_view_data.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Voldem0rt/Documents/AndroisStudioProjects/BOLDNG/app/src/main/res/layout/activity_view_edit_data.xml" value="0.33" />

@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.bold_ng"
-        minSdk 21
+        minSdk 30
         targetSdk 32
         versionCode 1
         versionName "1.0"

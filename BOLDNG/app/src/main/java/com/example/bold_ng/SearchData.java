@@ -41,8 +41,6 @@ public class SearchData extends AppCompatActivity {
         Button searchBtn1, searchBtn2, searchBtn3;
         EditText et1, et2, et3;
 
-        ListView apiListV;
-
         searchBtn1 = (Button) findViewById(R.id.sd_searchBtn);
         searchBtn2 = (Button) findViewById(R.id.sd_searchBtn2);
         searchBtn3 = (Button) findViewById(R.id.sd_searchBtn3);
@@ -51,24 +49,19 @@ public class SearchData extends AppCompatActivity {
         et2 = (EditText) findViewById(R.id.sd_SearchEditTxt2);
         et3 = (EditText) findViewById(R.id.sd_SearchEditTxt3);
 
-        //apiListV = (ListView) findViewById(R.id.apiListView);
-
         //CLick listeners for buttons
         searchBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Instantiate the RequestQueue.
+                //Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(SearchData.this);
                 //String url = "http://v3.boldsystems.org/index.php/API_Public/specimen?taxon=Aves&geo=Costa%20Rica&format=xml";
                 String url = et1.getText().toString();
-                // Request a string response from the provided URL.
+                //Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                // Display the first 500 characters of the response string.
-                                //textView.setText("Response is: " + response.substring(0,500));
-                                //Toast.makeText(SearchData.this, "button 1 clicked", Toast.LENGTH_SHORT).show();
                                 try {
                                     processParsing(response);
                                 } catch (XmlPullParserException e) {
@@ -77,14 +70,8 @@ public class SearchData extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SearchData.this, "Error occurred with API call", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                // Add the request to the RequestQueue.
+                        }, error -> Toast.makeText(SearchData.this, "Error occurred with API call", Toast.LENGTH_SHORT).show());
+                //Add the request to the RequestQueue.
                 queue.add(stringRequest);
             }
         });
@@ -105,9 +92,9 @@ public class SearchData extends AppCompatActivity {
     }
 
     private void processParsing(String r) throws XmlPullParserException, IOException{
-        TextView tV;
-        tV =  (TextView) findViewById(R.id.textView12);
-        
+            TextView tV;
+            tV =  (TextView) findViewById(R.id.textView12);
+
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
             XmlPullParser xpp = factory.newPullParser();
@@ -145,7 +132,5 @@ public class SearchData extends AppCompatActivity {
                 }
                 eventType = xpp.next();
             }
-
     }
-
 }

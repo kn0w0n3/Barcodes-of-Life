@@ -3,15 +3,24 @@ package com.example.bold_ng;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 public class RecordData extends AppCompatActivity {
     DatabaseHelper inputDatabase;
+
     EditText sampleID, fieldID, museumID, collectionCode, depositIn, phylum, classTxt,
              order, family, subfamily, genus, species, subspecies, binId, vStatus, tDescriptor,
              briefNote, reproduction, sex, lifeStage, detailedNote, country, province_State, region_Country,
@@ -19,16 +28,31 @@ public class RecordData extends AppCompatActivity {
              elevAccuracy, depth, depthAccuracy;
     Button saveBtn;
     Button viewAllBtn;
+    Button selectPicBtn;
+    ImageButton selectImgBtn;
+
+    // One Preview Image
+    ImageView IVPreviewImage;
+
+    // constant to compare
+    // the activity result code
+    int SELECT_PICTURE = 200;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_data);
+
         //etSupportActionBar().hide();
         inputDatabase = new DatabaseHelper(this);
 
         saveBtn = (Button) findViewById(R.id.rd_SaveBtn);
         viewAllBtn = (Button) findViewById(R.id.viewDataBtn);
+        selectPicBtn = (Button) findViewById(R.id.rd_ClearBtn);
+        selectImgBtn = (ImageButton) findViewById(R.id.imageButton);
+
+        IVPreviewImage = findViewById(R.id.IVPreviewImage);
 
         sampleID = (EditText) findViewById(R.id.sampleIDEditTxt);
         fieldID = (EditText) findViewById(R.id.fieldIDEditTxt);
@@ -72,6 +96,7 @@ public class RecordData extends AppCompatActivity {
 
         AddData();
         viewAll();
+        selectPicture();
     }
     //Insert Data
     public void AddData(){
@@ -79,6 +104,10 @@ public class RecordData extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.draw);
+                        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
+                        byte[] img = byteArray.toByteArray();
                        boolean isInserted =  inputDatabase.insertData(sampleID.getText().toString(), fieldID.getText().toString(),museumID.getText().toString(),
                                collectionCode.getText().toString(), depositIn.getText().toString(), phylum.getText().toString(), subfamily.getText().toString(),
                                classTxt.getText().toString(), order.getText().toString(), family.getText().toString(), genus.getText().toString(),
@@ -88,7 +117,7 @@ public class RecordData extends AppCompatActivity {
                                region_Country.getText().toString(), sector.getText().toString(), exactSite.getText().toString(), latitude.getText().toString(),
                                longitude.getText().toString(), cordSource.getText().toString(), cordAccuracy.getText().toString(), dateCollected.getText().toString(),
                                collectors.getText().toString(), elevation.getText().toString(), elevAccuracy.getText().toString(), depth.getText().toString(),
-                               depthAccuracy.getText().toString());
+                               depthAccuracy.getText().toString(), img);
 
                        if(isInserted){
                            Toast.makeText(RecordData.this, "Data Inserted", Toast.LENGTH_LONG).show();
@@ -148,5 +177,58 @@ public class RecordData extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
+    }
+    //https://stackoverflow.com/questions/48194733/whats-the-way-to-pick-images-from-gallery-on-android-in-2018
+    public void selectPicture(){
+        selectImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*
+                //this is prob in the wrong spot for now. https://youtu.be/v54dyccVZn0
+                //This will insert the picture into the database
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.draw);
+                ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
+                byte[] img = byteArray.toByteArray();
+                */
+                Toast.makeText(RecordData.this, "Clear button pressed", Toast.LENGTH_LONG).show();
+                imageChooser();
+            }
+        });
+    }
+
+    // this function is triggered when
+    // the Select Image Button is clicked
+    void imageChooser() {
+
+        // create an instance of the
+        // intent of the type image
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+    }
+
+    // this function is triggered when user
+    // selects the image from the imageChooser
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview image in the layout
+                    IVPreviewImage.setImageURI(selectedImageUri);
+                }
+            }
+        }
     }
 }
