@@ -1006,21 +1006,6 @@
             app:layout_constraintStart_toStartOf="@+id/depthEditTxt"
             app:layout_constraintTop_toBottomOf="@+id/depthEditTxt" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Input Data"
-
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView18"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.511"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.178" />
-
         <EditText
             android:id="@+id/dateCollectedEditTxt"
             android:layout_width="247dp"
@@ -1156,6 +1141,18 @@
             app:layout_constraintHorizontal_bias="0.352"
             app:layout_constraintStart_toStartOf="@+id/viewDataBtn"
             app:layout_constraintTop_toBottomOf="@+id/viewDataBtn" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/input_data_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

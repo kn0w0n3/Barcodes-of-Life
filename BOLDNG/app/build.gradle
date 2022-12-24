@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.bold_ng"
+        applicationId "com.secretcitylabs.bold_ng"
         minSdk 30
         targetSdk 32
         versionCode 1
