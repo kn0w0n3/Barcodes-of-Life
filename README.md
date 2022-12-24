@@ -19,5 +19,5 @@ https://www.boldsystems.org/
 https://www.sqlite.org/index.html    
 https://sqlitestudio.pl/
 
-# **IDE**  
+# **IDE:**  
 ![androidstudio](https://user-images.githubusercontent.com/22214754/209419249-7c587875-f300-4b50-bb72-2658750240bf.png)  
