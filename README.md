@@ -11,7 +11,11 @@ https://v3.boldsystems.org/index.php/resources/handbook?chapter=3_submissions.ht
 
 ![1](https://user-images.githubusercontent.com/22214754/208317701-5bf76483-6324-497e-8488-682b9eaec4d8.PNG)
 ![2](https://user-images.githubusercontent.com/22214754/208317704-60d88e29-51cc-4a06-910e-c537af146cab.PNG)
-![3](https://user-images.githubusercontent.com/22214754/208317706-b52d70af-6eb8-47b9-bc5a-05db276d4f42.PNG)  
+![3](https://user-images.githubusercontent.com/22214754/208317706-b52d70af-6eb8-47b9-bc5a-05db276d4f42.PNG) 
+
+# **Resources:**  
+https://ibol.org/  
+https://www.boldsystems.org/  
 
 # **Database:**        
 ![sqlitefg](https://user-images.githubusercontent.com/22214754/179894516-3059e142-fb38-40bc-a32c-65500a223eb1.png)    
