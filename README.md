@@ -1,4 +1,4 @@
-# Barcodes of Life Next Generation | DNA Barcoding App  
+# Barcodes of Life - Next Generation | DNA Barcoding App  
 Barcodes of Life Data - Next Generation
 
 ![BOLD-NG_GUI_12-24-22](https://user-images.githubusercontent.com/22214754/209444712-02c716d3-8d48-477a-ab07-321056cbefc7.gif)              
