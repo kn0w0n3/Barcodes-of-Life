@@ -5,9 +5,8 @@ Barcodes of Life Data - Next Generation
 
 The goal of this project is to provide an interface that will allow users to record the required information about a specimen. A mobile and desktop version will be available. The information can be updated at a later time to include the DNA barcode and allow for submission to the BOLD system database. The barcodes of Life application will also utilze the BOLD API to allow users to search DNA barcodes in real time.  
 
-# Search the BOLD database example  
-
-https://www.boldsystems.org/  
+# Submissions to BOLD  
+https://v3.boldsystems.org/index.php/resources/handbook?chapter=3_submissions.html  
 
 ![1](https://user-images.githubusercontent.com/22214754/208317701-5bf76483-6324-497e-8488-682b9eaec4d8.PNG)
 ![2](https://user-images.githubusercontent.com/22214754/208317704-60d88e29-51cc-4a06-910e-c537af146cab.PNG)
