@@ -5,7 +5,6 @@
 The goal of this project is to provide an interface that will allow users to record the required information about a specimen. A mobile and desktop version will be available. The information can be updated at a later time to include the DNA barcode and allow for submission to the BOLD system database. The barcodes of Life application will also utilze the BOLD API to allow users to search DNA barcodes in real time.  
 
 # Search the BOLD database example  
-![search_BOLD_database_12-17-22](https://user-images.githubusercontent.com/22214754/208265717-3b079402-925b-458e-8b23-cc1018ff2cc5.gif)
 
 https://www.boldsystems.org/  
 
