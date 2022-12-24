@@ -2,21 +2,41 @@ package com.example.bold_ng;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.List;
+import java.util.Locale;
+
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.widget.VideoView;
 
 public class RecordData extends AppCompatActivity {
     DatabaseHelper inputDatabase;
@@ -30,6 +50,9 @@ public class RecordData extends AppCompatActivity {
     Button viewAllBtn;
     Button selectPicBtn;
     ImageButton selectImgBtn;
+    TextView rd_ImageSelectTxtView;
+    //EditText current_Latitude;
+    //EditText current_Longitude;
 
     // One Preview Image
     ImageView IVPreviewImage;
@@ -38,11 +61,25 @@ public class RecordData extends AppCompatActivity {
     // the activity result code
     int SELECT_PICTURE = 200;
 
+    byte[] img;
+
+    String pathToImage;
+
+    Location gps_loc;
+    Location network_loc;
+    Location final_loc;
+    double longitude_i;
+    double latitude_i;
+    String userCountry, userAddress;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_data);
+
+
 
         //etSupportActionBar().hide();
         inputDatabase = new DatabaseHelper(this);
@@ -53,7 +90,7 @@ public class RecordData extends AppCompatActivity {
         selectImgBtn = (ImageButton) findViewById(R.id.imageButton);
 
         IVPreviewImage = findViewById(R.id.IVPreviewImage);
-
+        rd_ImageSelectTxtView = findViewById(R.id.imgSelectTxtView);
         sampleID = (EditText) findViewById(R.id.sampleIDEditTxt);
         fieldID = (EditText) findViewById(R.id.fieldIDEditTxt);
         museumID = (EditText) findViewById(R.id.museumIDEditTxt);
@@ -94,20 +131,87 @@ public class RecordData extends AppCompatActivity {
         depth = (EditText) findViewById(R.id.depthEditTxt);
         depthAccuracy = (EditText) findViewById(R.id.depthAccuracyEditTxt);
 
+        //Start Gps
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+
+        try {
+
+            gps_loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            network_loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (gps_loc != null) {
+            final_loc = gps_loc;
+            latitude_i = final_loc.getLatitude();
+            longitude_i = final_loc.getLongitude();
+
+            latitude.setText(String.valueOf(latitude_i));
+            longitude.setText(String.valueOf(longitude_i));
+        }
+        else if (network_loc != null) {
+            final_loc = network_loc;
+            latitude_i = final_loc.getLatitude();
+            longitude_i = final_loc.getLongitude();
+
+            latitude.setText(String.valueOf(latitude_i));
+            longitude.setText(String.valueOf(longitude_i));
+        }
+        else {
+            latitude_i = 0.0;
+            longitude_i = 0.0;
+
+            latitude.setText(String.valueOf(latitude_i));
+            longitude.setText(String.valueOf(longitude_i));
+        }
+
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE}, 1);
+
+        try {
+
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(latitude_i, longitude_i, 1);
+            if (addresses != null && addresses.size() > 0) {
+                userCountry = addresses.get(0).getCountryName();
+                userAddress = addresses.get(0).getAddressLine(0);
+                country.setText(userCountry);
+                province_State.setText(userAddress);
+            }
+            else {
+                userCountry = "Unknown";
+                country.setText(userCountry);
+                province_State.setText(userAddress);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    //End gps
+
         AddData();
         viewAll();
         selectPicture();
     }
+
     //Insert Data
     public void AddData(){
         saveBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.draw);
-                        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
-                        byte[] img = byteArray.toByteArray();
+                        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.draw);
+                        //ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+                        //bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
+                        //byte[] img = byteArray.toByteArray();
                        boolean isInserted =  inputDatabase.insertData(sampleID.getText().toString(), fieldID.getText().toString(),museumID.getText().toString(),
                                collectionCode.getText().toString(), depositIn.getText().toString(), phylum.getText().toString(), subfamily.getText().toString(),
                                classTxt.getText().toString(), order.getText().toString(), family.getText().toString(), genus.getText().toString(),
@@ -191,7 +295,7 @@ public class RecordData extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
                 byte[] img = byteArray.toByteArray();
                 */
-                Toast.makeText(RecordData.this, "Clear button pressed", Toast.LENGTH_LONG).show();
+                //Toast.makeText(RecordData.this, "Select Image button pressed", Toast.LENGTH_LONG).show();
                 imageChooser();
             }
         });
@@ -200,7 +304,6 @@ public class RecordData extends AppCompatActivity {
     // this function is triggered when
     // the Select Image Button is clicked
     void imageChooser() {
-
         // create an instance of the
         // intent of the type image
         Intent i = new Intent();
@@ -214,6 +317,7 @@ public class RecordData extends AppCompatActivity {
 
     // this function is triggered when user
     // selects the image from the imageChooser
+    //https://developer.android.com/reference/android/graphics/BitmapFactory
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -224,11 +328,41 @@ public class RecordData extends AppCompatActivity {
             if (requestCode == SELECT_PICTURE) {
                 // Get the url of the image from data
                 Uri selectedImageUri = data.getData();
+
+                //Display the file path in the text view
+                //rd_ImageSelectTxtView.setText(data.getData().toString());
+                pathToImage = selectedImageUri.getPath().toString();
+                //File file = new File(selectedImageUri.getPath());//create path from uri
+                //final String[] split = file.getPath().split(":");//split the path.
+                //String selectedFilePath = split[1];//assign it to a string(your choice).
+               // Toast.makeText(RecordData.this, "The URI to file path is: " + selectedFilePath, Toast.LENGTH_LONG).show();
+
+                //Store the selected image in the img variable
+                //Toast.makeText(RecordData.this, "Converting file for upload to database", Toast.LENGTH_LONG).show();
+                //Bitmap bitmap = BitmapFactory.decodeFile(data.getData().toString();
+                //ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+                //bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
+                //img = byteArray.toByteArray();
+
+
                 if (null != selectedImageUri) {
+
                     // update the preview image in the layout
                     IVPreviewImage.setImageURI(selectedImageUri);
+                    //getPathFromUri(RecordData.this ,selectedImageUri);
+                    //getRealPathFromURI(RecordData.this, selectedImageUri);
+                    storeImage(pathToImage);
                 }
             }
         }
+    }
+
+    //This seems to work. Need to get the file path. The uri is not working.
+    public void storeImage(String uriToTry){
+        Toast.makeText(RecordData.this, "The Uri to try is " + uriToTry, Toast.LENGTH_LONG).show();
+        Bitmap bitmap = BitmapFactory.decodeFile("/storage/emulated/0/Pictures/IMG_20221221_201534.jpg");
+        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
+        img = byteArray.toByteArray();
     }
 }

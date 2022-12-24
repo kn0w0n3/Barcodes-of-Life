@@ -3,9 +3,13 @@ package com.example.bold_ng;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.VideoView;
 
 public class MainController extends AppCompatActivity {
 
@@ -18,6 +22,7 @@ public class MainController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_controller);
         getSupportActionBar().hide();
+
 
         //Open the input data window when user clicks button
         recordDataBtn = findViewById(R.id.mc_InputDataBtn);
