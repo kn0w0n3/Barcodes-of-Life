@@ -1,5 +1,4 @@
 # Digital DNA - Next Generation | DNA Barcoding Helper App  
-Barcodes of Life Data - Next Generation
 
 ![Digital_DNA_12-25-22](https://user-images.githubusercontent.com/22214754/209504428-cdbf3e24-081c-4968-93c9-e581b8f4bce1.gif)                 
 
