@@ -38,6 +38,6 @@ public class Splash extends AppCompatActivity {
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     finish();
             }
-        },4000);
+        },1500);
     }
 }

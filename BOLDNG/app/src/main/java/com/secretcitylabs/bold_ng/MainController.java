@@ -10,7 +10,7 @@ import android.widget.Button;
 public class MainController extends AppCompatActivity {
 
     Button recordDataBtn;
-    Button searchDataBtnx;
+    Button viewMapBtnx;
     Button viewEditDataBtn;
 
     @Override
@@ -31,12 +31,12 @@ public class MainController extends AppCompatActivity {
         });
 
         //Open the search data window when user clicks button
-        searchDataBtnx = findViewById(R.id.mc_SearchDataBtn);
-        searchDataBtnx.setOnClickListener(new View.OnClickListener() {
+        viewMapBtnx = findViewById(R.id.mc_ViewMapBtn);
+        viewMapBtnx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent2 = new Intent(MainController.this, SearchData.class);
+                Intent intent2 = new Intent(MainController.this, MapsActivity.class);
                 startActivity(intent2);
             }
         });

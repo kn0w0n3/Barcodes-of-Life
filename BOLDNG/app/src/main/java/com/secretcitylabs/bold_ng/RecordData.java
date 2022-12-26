@@ -3,8 +3,13 @@ package com.secretcitylabs.bold_ng;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,7 +17,10 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,6 +38,29 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.provider.MediaStore;
+
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.webkit.MimeTypeMap;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.text.DecimalFormat;
+import java.util.Comparator;
+import java.util.List;
+
 
 public class RecordData extends AppCompatActivity {
     DatabaseHelper inputDatabase;
@@ -38,13 +70,10 @@ public class RecordData extends AppCompatActivity {
              briefNote, reproduction, sex, lifeStage, detailedNote, country, province_State, region_Country,
              sector, exactSite, latitude, longitude, cordSource, cordAccuracy, dateCollected, collectors, elevation,
              elevAccuracy, depth, depthAccuracy;
-    Button saveBtn;
-    Button viewAllBtn;
-    Button selectPicBtn;
+
+    Button saveBtn, viewAllBtn, selectPicBtn;;
     ImageButton selectImgBtn;
-    TextView rd_ImageSelectTxtView;
-    //EditText current_Latitude;
-    //EditText current_Longitude;
+    TextView rd_ImageSelectTxtView, imgNameTxt, imgPreviewTxt;
 
     // One Preview Image
     ImageView IVPreviewImage;
@@ -52,10 +81,7 @@ public class RecordData extends AppCompatActivity {
     // constant to compare
     // the activity result code
     int SELECT_PICTURE = 200;
-
     byte[] img;
-
-    String pathToImage;
 
     Location gps_loc;
     Location network_loc;
@@ -63,9 +89,11 @@ public class RecordData extends AppCompatActivity {
     double longitude_i;
     double latitude_i;
     String userCountry, userAddress;
+    private Bitmap imageToStore;
+    private ByteArrayOutputStream objectByteArrayOutPutStream;
+    private String imageName;
 
-
-
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +103,8 @@ public class RecordData extends AppCompatActivity {
 
         //etSupportActionBar().hide();
         inputDatabase = new DatabaseHelper(this);
+        imgNameTxt = (TextView) findViewById(R.id.imgSelectTxtView);
+        imgPreviewTxt = (TextView) findViewById(R.id.imagePreviewText);
 
         saveBtn = (Button) findViewById(R.id.rd_SaveBtn);
         viewAllBtn = (Button) findViewById(R.id.viewDataBtn);
@@ -83,45 +113,24 @@ public class RecordData extends AppCompatActivity {
 
         IVPreviewImage = findViewById(R.id.IVPreviewImage);
         rd_ImageSelectTxtView = findViewById(R.id.imgSelectTxtView);
-        sampleID = (EditText) findViewById(R.id.sampleIDEditTxt);
-        fieldID = (EditText) findViewById(R.id.fieldIDEditTxt);
-        museumID = (EditText) findViewById(R.id.museumIDEditTxt);
-        collectionCode = (EditText) findViewById(R.id.collectionCodeEditTxt);
-        depositIn = (EditText) findViewById(R.id.depositInEditTxt);
-        phylum = (EditText) findViewById(R.id.phylumEditTxt);
+
+        sampleID = (EditText) findViewById(R.id.sampleIDEditTxt); fieldID = (EditText) findViewById(R.id.fieldIDEditTxt); museumID = (EditText) findViewById(R.id.museumIDEditTxt);
+        collectionCode = (EditText) findViewById(R.id.collectionCodeEditTxt); depositIn = (EditText) findViewById(R.id.depositInEditTxt); phylum = (EditText) findViewById(R.id.phylumEditTxt);
         classTxt = (EditText) findViewById(R.id.classEditTxt);
 
-        order = (EditText) findViewById(R.id.orderEditTxt);
-        family = (EditText) findViewById(R.id.familyEditTxt);
-        subfamily = (EditText) findViewById(R.id.subfamilyEditTxt);
-        genus = (EditText) findViewById(R.id.genusEditTxt);
-        species = (EditText) findViewById(R.id.speciesEditTxt);
-        subspecies = (EditText) findViewById(R.id.subspeciesEditTxt);
+        order = (EditText) findViewById(R.id.orderEditTxt); family = (EditText) findViewById(R.id.familyEditTxt); subfamily = (EditText) findViewById(R.id.subfamilyEditTxt);
+        genus = (EditText) findViewById(R.id.genusEditTxt); species = (EditText) findViewById(R.id.speciesEditTxt); subspecies = (EditText) findViewById(R.id.subspeciesEditTxt);
         binId = (EditText) findViewById(R.id.binIdEditTxt);
 
-        vStatus = (EditText) findViewById(R.id.voucherStatusEditTxt);
-        tDescriptor = (EditText) findViewById(R.id.tissueDescriptorEditTxt);
-        briefNote = (EditText) findViewById(R.id.briefNoteEditTxt);
-        reproduction = (EditText) findViewById(R.id.reproductionEditTxt);
-        sex = (EditText) findViewById(R.id.sexEditTxt);
-        lifeStage = (EditText) findViewById(R.id.lifeStageEditTxt);
+        vStatus = (EditText) findViewById(R.id.voucherStatusEditTxt); tDescriptor = (EditText) findViewById(R.id.tissueDescriptorEditTxt); briefNote = (EditText) findViewById(R.id.briefNoteEditTxt);
+        reproduction = (EditText) findViewById(R.id.reproductionEditTxt); sex = (EditText) findViewById(R.id.sexEditTxt); lifeStage = (EditText) findViewById(R.id.lifeStageEditTxt);
         detailedNote = (EditText) findViewById(R.id.detailNoteEditTxt);
 
-        country = (EditText) findViewById(R.id.countryEditTxt);
-        province_State = (EditText) findViewById(R.id.province_StateEditTxt);
-        region_Country = (EditText) findViewById(R.id.region_CountryEditTxt);
-        sector = (EditText) findViewById(R.id.sectorEditTxt);
-        exactSite = (EditText) findViewById(R.id.exactSiteEditTxt);
-        latitude = (EditText) findViewById(R.id.latitudeEditTxt);
-        longitude = (EditText) findViewById(R.id.logitudeEditTxt);
-        cordSource = (EditText) findViewById(R.id.cordSourceEditTxt);
-        cordAccuracy = (EditText) findViewById(R.id.cordAccuracyEditTxt);
-        dateCollected = (EditText) findViewById(R.id.dateCollectedEditTxt);
-        collectors = (EditText) findViewById(R.id.collectorsEditTxt);
-        elevation = (EditText) findViewById(R.id.elevationEditTxt);
-        elevAccuracy = (EditText) findViewById(R.id.elevAccuracyEditTxt);
-        depth = (EditText) findViewById(R.id.depthEditTxt);
-        depthAccuracy = (EditText) findViewById(R.id.depthAccuracyEditTxt);
+        country = (EditText) findViewById(R.id.countryEditTxt); province_State = (EditText) findViewById(R.id.province_StateEditTxt); region_Country = (EditText) findViewById(R.id.region_CountryEditTxt);
+        sector = (EditText) findViewById(R.id.sectorEditTxt); exactSite = (EditText) findViewById(R.id.exactSiteEditTxt); latitude = (EditText) findViewById(R.id.latitudeEditTxt);
+        longitude = (EditText) findViewById(R.id.logitudeEditTxt); cordSource = (EditText) findViewById(R.id.cordSourceEditTxt); cordAccuracy = (EditText) findViewById(R.id.cordAccuracyEditTxt);
+        dateCollected = (EditText) findViewById(R.id.dateCollectedEditTxt); collectors = (EditText) findViewById(R.id.collectorsEditTxt); elevation = (EditText) findViewById(R.id.elevationEditTxt);
+        elevAccuracy = (EditText) findViewById(R.id.elevAccuracyEditTxt); depth = (EditText) findViewById(R.id.depthEditTxt); depthAccuracy = (EditText) findViewById(R.id.depthAccuracyEditTxt);
 
         //Start Gps
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -134,7 +143,6 @@ public class RecordData extends AppCompatActivity {
         }
 
         try {
-
             gps_loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             network_loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
@@ -217,6 +225,12 @@ public class RecordData extends AppCompatActivity {
 
                        if(isInserted){
                            Toast.makeText(RecordData.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                           sampleID.setText(""); fieldID.setText(""); museumID.setText(""); collectionCode.setText(""); depositIn.setText(""); phylum.setText(""); classTxt.setText("");
+                           order.setText(""); family.setText(""); subfamily.setText(""); genus.setText(""); species.setText(""); subspecies.setText("");binId.setText("");
+                           vStatus.setText(""); tDescriptor.setText(""); briefNote.setText(""); reproduction.setText(""); sex.setText(""); lifeStage.setText(""); detailedNote.setText("");
+                           country.setText(""); province_State.setText(""); region_Country.setText(""); sector.setText(""); exactSite.setText(""); latitude.setText(""); longitude.setText("");
+                           cordSource.setText(""); cordAccuracy.setText(""); dateCollected.setText(""); collectors.setText(""); elevation.setText(""); elevAccuracy.setText("");depth.setText("");
+                           depthAccuracy.setText("");imgNameTxt.setText("");imgPreviewTxt.setVisibility(View.INVISIBLE);IVPreviewImage.setImageResource(0);
                        }
                        else{
                            Toast.makeText(RecordData.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
@@ -274,19 +288,12 @@ public class RecordData extends AppCompatActivity {
         builder.setMessage(message);
         builder.show();
     }
+
     //https://stackoverflow.com/questions/48194733/whats-the-way-to-pick-images-from-gallery-on-android-in-2018
     public void selectPicture(){
         selectImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                //this is prob in the wrong spot for now. https://youtu.be/v54dyccVZn0
-                //This will insert the picture into the database
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.draw);
-                ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
-                byte[] img = byteArray.toByteArray();
-                */
                 //Toast.makeText(RecordData.this, "Select Image button pressed", Toast.LENGTH_LONG).show();
                 imageChooser();
             }
@@ -307,54 +314,64 @@ public class RecordData extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
     }
 
-    // this function is triggered when user
-    // selects the image from the imageChooser
+    // this function is triggered when user selects the image from the imageChooser
     //https://developer.android.com/reference/android/graphics/BitmapFactory
+    @SuppressLint("Range")
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
 
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
+            // compare the resultCode with the SELECT_PICTURE constant
             if (requestCode == SELECT_PICTURE) {
                 // Get the url of the image from data
                 Uri selectedImageUri = data.getData();
 
-                //Display the file path in the text view
-                //rd_ImageSelectTxtView.setText(data.getData().toString());
-                pathToImage = selectedImageUri.getPath().toString();
-                //File file = new File(selectedImageUri.getPath());//create path from uri
-                //final String[] split = file.getPath().split(":");//split the path.
-                //String selectedFilePath = split[1];//assign it to a string(your choice).
-               // Toast.makeText(RecordData.this, "The URI to file path is: " + selectedFilePath, Toast.LENGTH_LONG).show();
+                try {
+                    imageToStore = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                //Store the selected image in the img variable
-                //Toast.makeText(RecordData.this, "Converting file for upload to database", Toast.LENGTH_LONG).show();
-                //Bitmap bitmap = BitmapFactory.decodeFile(data.getData().toString();
-                //ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-                //bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
-                //img = byteArray.toByteArray();
+                // Get the file's content URI from the incoming Intent,
+                // then query the server app to get the file's display nam eand size
+                Cursor returnCursor = getContentResolver().query(selectedImageUri , null, null, null, null);
 
+                //Get the column indexes of the data in the Cursor,
+                //move to the first row in the Cursor, get the data, and display it.
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
+                returnCursor.moveToFirst();
+
+                //Store the image name
+                imageName = returnCursor.getString(nameIndex);
+
+                //Set image name in text view
+                imgNameTxt.setText(" " + imageName);
 
                 if (null != selectedImageUri) {
-
                     // update the preview image in the layout
+                    imgPreviewTxt.setVisibility(View.VISIBLE);
                     IVPreviewImage.setImageURI(selectedImageUri);
-                    //getPathFromUri(RecordData.this ,selectedImageUri);
-                    //getRealPathFromURI(RecordData.this, selectedImageUri);
-                    storeImage(pathToImage);
+                    storeImage(new ModelClass(imageName, imageToStore));
                 }
             }
         }
     }
-
-    //This seems to work. Need to get the file path. The uri is not working.
-    public void storeImage(String uriToTry){
-        Toast.makeText(RecordData.this, "The Uri to try is " + uriToTry, Toast.LENGTH_LONG).show();
-        Bitmap bitmap = BitmapFactory.decodeFile("/storage/emulated/0/Pictures/IMG_20221221_201534.jpg");
-        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
-        img = byteArray.toByteArray();
+    //New Method: https://www.youtube.com/watch?v=OBtEwSe4LEQ 12-25-22
+    //When the user selects a picture, it gets displayed in the image view and then gets converted
+    //to a byte array here. When the user clicks save, the image Byte array should be sent over to the
+    //database helper top be inserted
+    public void storeImage(ModelClass objectModelClass){
+        try {
+            Bitmap imageToStoreBitmap = objectModelClass.getImage();
+            objectByteArrayOutPutStream = new ByteArrayOutputStream();
+            imageToStoreBitmap.compress(Bitmap.CompressFormat.JPEG, 100, objectByteArrayOutPutStream);
+            img = objectByteArrayOutPutStream.toByteArray();
+        }
+        catch (Exception e) {
+            Toast.makeText(RecordData.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
     }
 }
