@@ -1,4 +1,4 @@
-# Barcodes of Life - Next Generation | DNA Barcoding Helper App  
+# Digital DNA - Next Generation | DNA Barcoding Helper App  
 Barcodes of Life Data - Next Generation
 
 ![BOL_GUI_MAP12-25-22](https://user-images.githubusercontent.com/22214754/209474641-4c5ebb57-7bea-4a86-86cd-4f4e7fc12cc0.gif)                
