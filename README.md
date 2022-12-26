@@ -1,7 +1,7 @@
 # Digital DNA - Next Generation | DNA Barcoding Helper App  
 Barcodes of Life Data - Next Generation
 
-![BOL_GUI_MAP12-25-22](https://user-images.githubusercontent.com/22214754/209474641-4c5ebb57-7bea-4a86-86cd-4f4e7fc12cc0.gif)                
+![Digital_DNA_12-25-22](https://user-images.githubusercontent.com/22214754/209504428-cdbf3e24-081c-4968-93c9-e581b8f4bce1.gif)                 
 
 The goal of this project is to provide an interface that will allow users to store the required information about a specimen and retrieve it later for further processing, analysis and submission to the BOLD database.  
 
