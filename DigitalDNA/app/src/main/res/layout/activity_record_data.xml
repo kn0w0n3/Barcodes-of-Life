@@ -1156,7 +1156,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/input_data_text" />
+            app:srcCompat="@drawable/input_data_label_tex2t" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

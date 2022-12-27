@@ -24,6 +24,9 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,6 +35,12 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.MediaStore;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class RecordData extends AppCompatActivity {
@@ -58,6 +67,10 @@ public class RecordData extends AppCompatActivity {
     Location gps_loc;
     Location network_loc;
     Location final_loc;
+    Location gpsInfo;
+    double iCurrentAltitude_GPS;
+    String sCordSource;
+    double dGpsAccuracy;
     double longitude_i;
     double latitude_i;
     String userCountry, userAddress;
@@ -110,13 +123,13 @@ public class RecordData extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
-
             return;
         }
 
         try {
             gps_loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             network_loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            gpsInfo = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,11 +137,26 @@ public class RecordData extends AppCompatActivity {
 
         if (gps_loc != null) {
             final_loc = gps_loc;
+
+            //Get latitude and longitude and auto fill form
             latitude_i = final_loc.getLatitude();
             longitude_i = final_loc.getLongitude();
-
             latitude.setText(String.valueOf(latitude_i));
             longitude.setText(String.valueOf(longitude_i));
+
+            //Get the altitude and auto fill form
+            iCurrentAltitude_GPS = gpsInfo.getAltitude();
+            elevation.setText(String.valueOf(iCurrentAltitude_GPS));
+
+            //Get coordinate source and auto fill form
+            sCordSource = gpsInfo.getProvider();
+            cordSource.setText(sCordSource);
+
+            //Get accuracy info and auto fill form
+            dGpsAccuracy = gpsInfo.getAccuracy();
+            elevAccuracy.setText(String.valueOf(dGpsAccuracy));
+            depthAccuracy.setText(String.valueOf(dGpsAccuracy));
+            cordAccuracy.setText(String.valueOf(dGpsAccuracy));
         }
         else if (network_loc != null) {
             final_loc = network_loc;
@@ -149,25 +177,30 @@ public class RecordData extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE}, 1);
 
         try {
-
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(latitude_i, longitude_i, 1);
             if (addresses != null && addresses.size() > 0) {
                 userCountry = addresses.get(0).getCountryName();
                 userAddress = addresses.get(0).getAddressLine(0);
                 country.setText(userCountry);
-                province_State.setText(userAddress);
+                exactSite.setText(userAddress);
             }
             else {
                 userCountry = "Unknown";
                 country.setText(userCountry);
-                province_State.setText(userAddress);
+                exactSite.setText(userAddress);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     //End gps
+
+        //Get the current date and auto fill the text for the user
+        Date todayDate = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String todayString = formatter.format(todayDate);
+        dateCollected.setText(todayString);
 
         AddData();
         viewAll();
@@ -180,10 +213,6 @@ public class RecordData extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.draw);
-                        //ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-                        //bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArray);
-                        //byte[] img = byteArray.toByteArray();
                        boolean isInserted =  inputDatabase.insertData(sampleID.getText().toString(), fieldID.getText().toString(),museumID.getText().toString(),
                                collectionCode.getText().toString(), depositIn.getText().toString(), phylum.getText().toString(), subfamily.getText().toString(),
                                classTxt.getText().toString(), order.getText().toString(), family.getText().toString(), genus.getText().toString(),
@@ -268,6 +297,7 @@ public class RecordData extends AppCompatActivity {
             public void onClick(View view) {
                 //Toast.makeText(RecordData.this, "Select Image button pressed", Toast.LENGTH_LONG).show();
                 imageChooser();
+
             }
         });
     }
@@ -326,6 +356,7 @@ public class RecordData extends AppCompatActivity {
                     imgPreviewTxt.setVisibility(View.VISIBLE);
                     IVPreviewImage.setImageURI(selectedImageUri);
                     storeImage(new ModelClass(imageName, imageToStore));
+                    //getCurrentElevation();
                 }
             }
         }

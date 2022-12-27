@@ -90,7 +90,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (Location location : locationResult.getLocations()) {
                     if (location != null) {
                         //Toast.makeText(getApplicationContext(), "current location is " + location.getLongitude(), Toast.LENGTH_LONG).show();
-
+                        //Toast.makeText(getApplicationContext(), "current elevation....... " + location.getAltitude(), Toast.LENGTH_LONG).show();
                         //TODO: UI updates.
                     }
                 }
