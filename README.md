@@ -1,8 +1,9 @@
-# Digital DNA - Next Generation | DNA Barcoding Helper App  
+# Digital DNA   
+DNA Barcoding Helper App  
 
 ![Digital_DNA_12-26-22](https://user-images.githubusercontent.com/22214754/209532031-a38c5be6-e145-4317-a9b2-43cb13b6f53e.gif)                   
 
-The goal of this project is to provide an interface that will allow users to store the required information about a specimen and retrieve it later for further processing, analysis and submission to the BOLD database.  
+The goal of this project is to provide an interface that will allow users to store the required information about a specimen and retrieve it later for further processing, analysis, and submission to the BOLD database.  
 
 # Submissions to BOLD  
 Instructions for making submissions to the BOLD system can be found at the following link:  
