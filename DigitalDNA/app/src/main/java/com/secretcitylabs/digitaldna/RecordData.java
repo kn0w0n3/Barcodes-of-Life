@@ -56,14 +56,12 @@ public class RecordData extends AppCompatActivity {
     ImageButton selectImgBtn;
     TextView rd_ImageSelectTxtView, imgNameTxt, imgPreviewTxt;
 
-    // One Preview Image
     ImageView IVPreviewImage;
 
-    // constant to compare
-    // the activity result code
+    // constant to compare the activity result code
     int SELECT_PICTURE = 200;
-    byte[] img;
 
+    byte[] img;
     Location gps_loc;
     Location network_loc;
     Location final_loc;
@@ -85,9 +83,8 @@ public class RecordData extends AppCompatActivity {
         setContentView(R.layout.activity_record_data);
         getSupportActionBar().hide();
 
-
-        //etSupportActionBar().hide();
         inputDatabase = new DatabaseHelper(this);
+
         imgNameTxt = (TextView) findViewById(R.id.imgSelectTxtView);
         imgPreviewTxt = (TextView) findViewById(R.id.imagePreviewText);
 
@@ -135,6 +132,7 @@ public class RecordData extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //Check GPS first and use if available
         if (gps_loc != null) {
             final_loc = gps_loc;
 
@@ -158,8 +156,10 @@ public class RecordData extends AppCompatActivity {
             depthAccuracy.setText(String.valueOf(dGpsAccuracy));
             cordAccuracy.setText(String.valueOf(dGpsAccuracy));
         }
+        //Check Network if no GPS. If there is network connectivity, get the data.
         else if (network_loc != null) {
             final_loc = network_loc;
+
             latitude_i = final_loc.getLatitude();
             longitude_i = final_loc.getLongitude();
 
@@ -297,44 +297,36 @@ public class RecordData extends AppCompatActivity {
             public void onClick(View view) {
                 //Toast.makeText(RecordData.this, "Select Image button pressed", Toast.LENGTH_LONG).show();
                 imageChooser();
-
             }
         });
     }
 
-    // this function is triggered when
-    // the Select Image Button is clicked
+    // this function is triggered when the Select Image Button is clicked
     void imageChooser() {
-        // create an instance of the
-        // intent of the type image
+        // create an instance of the intent of the type image
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
 
-        // pass the constant to compare it
-        // with the returned requestCode
+        // pass the constant to compare it with the returned requestCode
         startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
     }
 
-    // this function is triggered when user selects the image from the imageChooser
+    //This function is triggered when user selects the image from the imageChooser
     //https://developer.android.com/reference/android/graphics/BitmapFactory
     @SuppressLint("Range")
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK) {
-
             // compare the resultCode with the SELECT_PICTURE constant
             if (requestCode == SELECT_PICTURE) {
                 // Get the url of the image from data
                 Uri selectedImageUri = data.getData();
-
                 try {
                     imageToStore = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 // Get the file's content URI from the incoming Intent,
                 // then query the server app to get the file's display nam eand size
                 Cursor returnCursor = getContentResolver().query(selectedImageUri , null, null, null, null);
@@ -356,15 +348,15 @@ public class RecordData extends AppCompatActivity {
                     imgPreviewTxt.setVisibility(View.VISIBLE);
                     IVPreviewImage.setImageURI(selectedImageUri);
                     storeImage(new ModelClass(imageName, imageToStore));
-                    //getCurrentElevation();
                 }
             }
         }
     }
+
     //New Method: https://www.youtube.com/watch?v=OBtEwSe4LEQ 12-25-22
     //When the user selects a picture, it gets displayed in the image view and then gets converted
     //to a byte array here. When the user clicks save, the image Byte array should be sent over to the
-    //database helper top be inserted
+    //database helper to be inserted
     public void storeImage(ModelClass objectModelClass){
         try {
             Bitmap imageToStoreBitmap = objectModelClass.getImage();
