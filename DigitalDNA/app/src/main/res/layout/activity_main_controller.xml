@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.843"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.533" />
 
     <Button
         android:id="@+id/mc_InputDataBtn"
@@ -53,11 +53,11 @@
         app:layout_constraintVertical_bias="0.533" />
 
     <Button
-        android:id="@+id/mc_HelpBtn"
+        android:id="@+id/mc_LoadDataBtn"
         android:layout_width="136dp"
         android:layout_height="75dp"
         android:backgroundTint="@android:color/holo_green_dark"
-        android:text="Help"
+        android:text="Load Data"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,17 +81,17 @@
         app:layout_constraintVertical_bias="0.695" />
 
     <Button
-        android:id="@+id/mc_UploadDataBtn"
+        android:id="@+id/mc_ExportDataBtn"
         android:layout_width="136dp"
         android:layout_height="75dp"
         android:backgroundTint="@android:color/holo_green_dark"
-        android:text="Upload  Data"
+        android:text="Export  Data"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.843"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.37" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ public class MainController extends AppCompatActivity {
     Button recordDataBtn;
     Button viewMapBtnx;
     Button viewEditDataBtn;
+    Button exportDtaBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +20,17 @@ public class MainController extends AppCompatActivity {
         setContentView(R.layout.activity_main_controller);
         getSupportActionBar().hide();
 
+        //Button to start export data activity
+        exportDtaBtn = findViewById(R.id.mc_ExportDataBtn);
+        exportDtaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent exportIntent = new Intent(MainController.this, ExportData.class);
+                startActivity(exportIntent);
+            }
+        });
 
-        //Open the input data window when user clicks button
+        //Open the input data activity when user clicks button
         recordDataBtn = findViewById(R.id.mc_InputDataBtn);
         recordDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
