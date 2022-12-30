@@ -4,7 +4,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,9 +14,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class ExportData extends AppCompatActivity {
     DatabaseHelper exportDatabase;
@@ -32,9 +39,18 @@ public class ExportData extends AppCompatActivity {
         getSupportActionBar().hide();
 
         exportDatabase = new DatabaseHelper(this);
-        exportDataBtn = (Button) findViewById(R.id.exportDataButton);
+
         dbContentsTextView = findViewById(R.id.scrollViewTextView);
         dbCountTextView = findViewById(R.id.dbEntryCountTxtView);
+
+        exportDataBtn = (Button) findViewById(R.id.exportDataButton);
+        exportDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exportDatabase.exportDatabase_CSV();
+                Toast.makeText(getApplicationContext(), "Exporting to CSV.....", Toast.LENGTH_LONG).show();
+            }
+        });
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
@@ -50,7 +66,6 @@ public class ExportData extends AppCompatActivity {
 
         //Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-
 
         Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
         List<String> whatToExport = Arrays.asList(" Select Export Type", "Selected Items", "All");

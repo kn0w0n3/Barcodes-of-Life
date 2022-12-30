@@ -1,12 +1,22 @@
 package com.secretcitylabs.digitaldna;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public final static String DATABASE_NAME = "specimen_data.db";
@@ -118,5 +128,83 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME, null);
         return res;
+    }
+
+    //Export the contents of te database to a CSV file
+    public boolean exportDatabase_CSV() {
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+
+        /**First of all we check if the external storage of the device is available for writing.
+         * Remember that the external storage is not necessarily the sd card. Very often it is
+         * the device storage.
+         */
+
+        String state = Environment.getExternalStorageState();
+        if (!Environment.MEDIA_MOUNTED.equals(state)) {
+            return false;
+        }
+        else {
+            //We use the Download directory for saving our .csv file.
+            File exportDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            if (!exportDir.exists())
+            {
+                exportDir.mkdirs();
+            }
+
+            File file;
+            PrintWriter printWriter = null;
+            try
+            {
+                file = new File(exportDir, "MyCSVFile.csv");
+                file.createNewFile();
+                printWriter = new PrintWriter(new FileWriter(file));
+
+                /**This is our database connector class that reads the data from the database.
+                 * The code of this class is omitted for brevity.
+                 */
+                SQLiteDatabase db = this.getReadableDatabase(); //open the database for reading
+
+                /**Let's read the first table of the database.
+                 * getFirstTable() is a method in our DBCOurDatabaseConnector class which retrieves a Cursor
+                 * containing all records of the table (all fields).
+                 * The code of this class is omitted for brevity.
+                 */
+                Cursor curCSV = db.rawQuery("select * from " + TABLE_NAME, null);
+                //Write the name of the table and the name of the columns (comma separated values) in the .csv file.
+                printWriter.println("FIRST TABLE OF THE DATABASE");
+                printWriter.println("DATE,ITEM,AMOUNT,CURRENCY");
+                while(curCSV.moveToNext())
+                {
+                    @SuppressLint("Range") String f_field_id = curCSV.getString(curCSV.getColumnIndex("i_sample_id"));
+                    ///Long date = curCSV.getLong(curCSV.getColumnIndex("date"));
+                    //String title = curCSV.getString(curCSV.getColumnIndex("title"));
+                    //Float amount = curCSV.getFloat(curCSV.getColumnIndex("amount"));
+                    //String description = curCSV.getString(curCSV.getColumnIndex("description"));
+
+                    /**Create the line to write in the .csv file.
+                     * We need a String where values are comma separated.
+                     * The field date (Long) is formatted in a readable text. The amount field
+                     * is converted into String.
+                     */
+                    String record = df.format(f_field_id);
+                    printWriter.println(record); //write the record in the .csv file
+                }
+
+                curCSV.close();
+                db.close();
+            }
+            catch(Exception exc) {
+                //if there are any exceptions, return false
+                return false;
+            }
+            finally {
+                if(printWriter != null) printWriter.close();
+            }
+
+            //If there are no errors, return true.
+            //Toast.makeText(getApplicationContext(), "current location is null ", Toast.LENGTH_LONG).show();
+            return true;
+
+        }
     }
 }
