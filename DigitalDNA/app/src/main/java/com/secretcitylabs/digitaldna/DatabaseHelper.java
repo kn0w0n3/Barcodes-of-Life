@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -130,81 +133,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    //Export the contents of te database to a CSV file
-    public boolean exportDatabase_CSV() {
-        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+    //Export the contents of the database to a CSV file
+    public void exportDB_CSV() {
 
-        /**First of all we check if the external storage of the device is available for writing.
-         * Remember that the external storage is not necessarily the sd card. Very often it is
-         * the device storage.
-         */
+        //Get the current date to include in the file name
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+        String currentDateString = formatter.format(currentDate);
 
-        String state = Environment.getExternalStorageState();
-        if (!Environment.MEDIA_MOUNTED.equals(state)) {
-            return false;
+        //SQLiteDatabase db = this.getReadableDatabase();
+        File exportDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        if (!exportDir.exists()) {
+            exportDir.mkdirs();
         }
-        else {
-            //We use the Download directory for saving our .csv file.
-            File exportDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            if (!exportDir.exists())
-            {
-                exportDir.mkdirs();
+
+        File file = new File(exportDir, currentDateString + "_export_specimen_data" + ".csv");
+        try {
+            file.createNewFile();
+            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor curCSV = db.rawQuery("SELECT * FROM " + TABLE_NAME,null);
+            csvWrite.writeNext(curCSV.getColumnNames());
+            while(curCSV.moveToNext()) {
+                //Columns to export
+                String arrStr[] ={curCSV.getString(0), curCSV.getString(1), curCSV.getString(2),
+                                  curCSV.getString(3), curCSV.getString(4), curCSV.getString(5),
+                                  curCSV.getString(6), curCSV.getString(7), curCSV.getString(8),
+                                  curCSV.getString(9), curCSV.getString(10), curCSV.getString(11),
+                                  curCSV.getString(12), curCSV.getString(13), curCSV.getString(14),
+                                  curCSV.getString(15), curCSV.getString(16), curCSV.getString(16),
+                                  curCSV.getString(17), curCSV.getString(18), curCSV.getString(19),
+                                  curCSV.getString(20), curCSV.getString(21), curCSV.getString(22),
+                                  curCSV.getString(23), curCSV.getString(24), curCSV.getString(25),
+                                  curCSV.getString(26), curCSV.getString(27), curCSV.getString(28),
+                                  curCSV.getString(29), curCSV.getString(30), curCSV.getString(31),
+                                  curCSV.getString(32), curCSV.getString(33), curCSV.getString(34),
+                                  curCSV.getString(35), curCSV.getString(36)};
+                csvWrite.writeNext(arrStr);
             }
-
-            File file;
-            PrintWriter printWriter = null;
-            try
-            {
-                file = new File(exportDir, "MyCSVFile.csv");
-                file.createNewFile();
-                printWriter = new PrintWriter(new FileWriter(file));
-
-                /**This is our database connector class that reads the data from the database.
-                 * The code of this class is omitted for brevity.
-                 */
-                SQLiteDatabase db = this.getReadableDatabase(); //open the database for reading
-
-                /**Let's read the first table of the database.
-                 * getFirstTable() is a method in our DBCOurDatabaseConnector class which retrieves a Cursor
-                 * containing all records of the table (all fields).
-                 * The code of this class is omitted for brevity.
-                 */
-                Cursor curCSV = db.rawQuery("select * from " + TABLE_NAME, null);
-                //Write the name of the table and the name of the columns (comma separated values) in the .csv file.
-                printWriter.println("FIRST TABLE OF THE DATABASE");
-                printWriter.println("DATE,ITEM,AMOUNT,CURRENCY");
-                while(curCSV.moveToNext())
-                {
-                    @SuppressLint("Range") String f_field_id = curCSV.getString(curCSV.getColumnIndex("i_sample_id"));
-                    ///Long date = curCSV.getLong(curCSV.getColumnIndex("date"));
-                    //String title = curCSV.getString(curCSV.getColumnIndex("title"));
-                    //Float amount = curCSV.getFloat(curCSV.getColumnIndex("amount"));
-                    //String description = curCSV.getString(curCSV.getColumnIndex("description"));
-
-                    /**Create the line to write in the .csv file.
-                     * We need a String where values are comma separated.
-                     * The field date (Long) is formatted in a readable text. The amount field
-                     * is converted into String.
-                     */
-                    String record = df.format(f_field_id);
-                    printWriter.println(record); //write the record in the .csv file
-                }
-
-                curCSV.close();
-                db.close();
-            }
-            catch(Exception exc) {
-                //if there are any exceptions, return false
-                return false;
-            }
-            finally {
-                if(printWriter != null) printWriter.close();
-            }
-
-            //If there are no errors, return true.
-            //Toast.makeText(getApplicationContext(), "current location is null ", Toast.LENGTH_LONG).show();
-            return true;
-
+            csvWrite.close();
+            curCSV.close();
+        }
+        catch(Exception sqlEx) {
+            Log.e("DatabaseHelper", sqlEx.getMessage(), sqlEx);
         }
     }
 }

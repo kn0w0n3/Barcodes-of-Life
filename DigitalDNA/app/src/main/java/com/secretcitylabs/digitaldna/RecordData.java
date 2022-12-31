@@ -42,7 +42,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
 public class RecordData extends AppCompatActivity {
     DatabaseHelper inputDatabase;
 
@@ -52,29 +51,20 @@ public class RecordData extends AppCompatActivity {
              sector, exactSite, latitude, longitude, cordSource, cordAccuracy, dateCollected, collectors, elevation,
              elevAccuracy, depth, depthAccuracy;
 
-    Button saveBtn, viewAllBtn, selectPicBtn;;
-    ImageButton selectImgBtn;
+    Button saveBtn, viewAllBtn, clearBtn;
     TextView rd_ImageSelectTxtView, imgNameTxt, imgPreviewTxt;
-
+    Location gps_loc, network_loc, final_loc, gpsInfo ;
+    double iCurrentAltitude_GPS, dGpsAccuracy, longitude_i, latitude_i;
+    ImageButton selectImgBtn;
     ImageView IVPreviewImage;
 
     // constant to compare the activity result code
     int SELECT_PICTURE = 200;
-
     byte[] img;
-    Location gps_loc;
-    Location network_loc;
-    Location final_loc;
-    Location gpsInfo;
-    double iCurrentAltitude_GPS;
-    String sCordSource;
-    double dGpsAccuracy;
-    double longitude_i;
-    double latitude_i;
-    String userCountry, userAddress;
+
+    private String userCountry, userAddress, sCordSource, imageName;
     private Bitmap imageToStore;
     private ByteArrayOutputStream objectByteArrayOutPutStream;
-    private String imageName;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -90,7 +80,7 @@ public class RecordData extends AppCompatActivity {
 
         saveBtn = (Button) findViewById(R.id.rd_SaveBtn);
         viewAllBtn = (Button) findViewById(R.id.viewDataBtn);
-        selectPicBtn = (Button) findViewById(R.id.rd_ClearBtn);
+        clearBtn = (Button) findViewById(R.id.rd_ClearBtn);
         selectImgBtn = (ImageButton) findViewById(R.id.imageButton);
 
         IVPreviewImage = findViewById(R.id.IVPreviewImage);
@@ -127,8 +117,8 @@ public class RecordData extends AppCompatActivity {
             gps_loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             network_loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             gpsInfo = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -145,6 +135,7 @@ public class RecordData extends AppCompatActivity {
             //Get the altitude and auto fill form
             iCurrentAltitude_GPS = gpsInfo.getAltitude();
             elevation.setText(String.valueOf(iCurrentAltitude_GPS));
+            depth.setText(String.valueOf(iCurrentAltitude_GPS));
 
             //Get coordinate source and auto fill form
             sCordSource = gpsInfo.getProvider();
@@ -155,6 +146,7 @@ public class RecordData extends AppCompatActivity {
             elevAccuracy.setText(String.valueOf(dGpsAccuracy));
             depthAccuracy.setText(String.valueOf(dGpsAccuracy));
             cordAccuracy.setText(String.valueOf(dGpsAccuracy));
+            //Toast.makeText(RecordData.this, "Depth accuracy test: " + dGpsAccuracy, Toast.LENGTH_LONG).show();
         }
         //Check Network if no GPS. If there is network connectivity, get the data.
         else if (network_loc != null) {
@@ -174,7 +166,9 @@ public class RecordData extends AppCompatActivity {
             longitude.setText(String.valueOf(longitude_i));
         }
 
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE}, 1);
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
+                                                                     Manifest.permission.ACCESS_COARSE_LOCATION,
+                                                                     Manifest.permission.ACCESS_NETWORK_STATE}, 1);
 
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -205,6 +199,8 @@ public class RecordData extends AppCompatActivity {
         AddData();
         viewAll();
         selectPicture();
+        clearText();
+        getLocationDetails();
     }
 
     //Insert Data
@@ -225,13 +221,13 @@ public class RecordData extends AppCompatActivity {
                                depthAccuracy.getText().toString(), img);
 
                        if(isInserted){
-                           Toast.makeText(RecordData.this, "Data Inserted", Toast.LENGTH_LONG).show();
-                           sampleID.setText(""); fieldID.setText(""); museumID.setText(""); collectionCode.setText(""); depositIn.setText(""); phylum.setText(""); classTxt.setText("");
-                           order.setText(""); family.setText(""); subfamily.setText(""); genus.setText(""); species.setText(""); subspecies.setText("");binId.setText("");
-                           vStatus.setText(""); tDescriptor.setText(""); briefNote.setText(""); reproduction.setText(""); sex.setText(""); lifeStage.setText(""); detailedNote.setText("");
-                           country.setText(""); province_State.setText(""); region_Country.setText(""); sector.setText(""); exactSite.setText(""); latitude.setText(""); longitude.setText("");
-                           cordSource.setText(""); cordAccuracy.setText(""); dateCollected.setText(""); collectors.setText(""); elevation.setText(""); elevAccuracy.setText("");depth.setText("");
-                           depthAccuracy.setText("");imgNameTxt.setText("");imgPreviewTxt.setVisibility(View.INVISIBLE);IVPreviewImage.setImageResource(0);
+                               Toast.makeText(RecordData.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                               sampleID.setText(""); fieldID.setText(""); museumID.setText(""); collectionCode.setText(""); depositIn.setText(""); phylum.setText(""); classTxt.setText("");
+                               order.setText(""); family.setText(""); subfamily.setText(""); genus.setText(""); species.setText(""); subspecies.setText("");binId.setText("");
+                               vStatus.setText(""); tDescriptor.setText(""); briefNote.setText(""); reproduction.setText(""); sex.setText(""); lifeStage.setText(""); detailedNote.setText("");
+                               country.setText(""); province_State.setText(""); region_Country.setText(""); sector.setText(""); exactSite.setText(""); latitude.setText(""); longitude.setText("");
+                               cordSource.setText(""); cordAccuracy.setText(""); dateCollected.setText(""); collectors.setText(""); elevation.setText(""); elevAccuracy.setText("");depth.setText("");
+                               depthAccuracy.setText("");imgNameTxt.setText("");imgPreviewTxt.setVisibility(View.INVISIBLE);IVPreviewImage.setImageResource(0);
                        }
                        else{
                            Toast.makeText(RecordData.this, "Data Not Inserted", Toast.LENGTH_LONG).show();
@@ -314,7 +310,6 @@ public class RecordData extends AppCompatActivity {
 
     //This function is triggered when user selects the image from the imageChooser
     //https://developer.android.com/reference/android/graphics/BitmapFactory
-    @SuppressLint("Range")
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
@@ -324,11 +319,12 @@ public class RecordData extends AppCompatActivity {
                 Uri selectedImageUri = data.getData();
                 try {
                     imageToStore = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
                 // Get the file's content URI from the incoming Intent,
-                // then query the server app to get the file's display nam eand size
+                // then query the server app to get the file's display name and size
                 Cursor returnCursor = getContentResolver().query(selectedImageUri , null, null, null, null);
 
                 //Get the column indexes of the data in the Cursor,
@@ -355,8 +351,7 @@ public class RecordData extends AppCompatActivity {
 
     //New Method: https://www.youtube.com/watch?v=OBtEwSe4LEQ 12-25-22
     //When the user selects a picture, it gets displayed in the image view and then gets converted
-    //to a byte array here. When the user clicks save, the image Byte array should be sent over to the
-    //database helper to be inserted
+    //to a byte array here. When the user clicks save, the image Byte array should be sent over to the database helper to be inserted
     public void storeImage(ModelClass objectModelClass){
         try {
             Bitmap imageToStoreBitmap = objectModelClass.getImage();
@@ -366,6 +361,56 @@ public class RecordData extends AppCompatActivity {
         }
         catch (Exception e) {
             Toast.makeText(RecordData.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+    //Clear all text when the clear button is pressed
+    public void clearText(){
+        clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sampleID.setText(""); fieldID.setText(""); museumID.setText(""); collectionCode.setText(""); depositIn.setText(""); phylum.setText(""); classTxt.setText("");
+                order.setText(""); family.setText(""); subfamily.setText(""); genus.setText(""); species.setText(""); subspecies.setText("");binId.setText("");
+                vStatus.setText(""); tDescriptor.setText(""); briefNote.setText(""); reproduction.setText(""); sex.setText(""); lifeStage.setText(""); detailedNote.setText("");
+                country.setText(""); province_State.setText(""); region_Country.setText(""); sector.setText(""); exactSite.setText(""); latitude.setText(""); longitude.setText("");
+                cordSource.setText(""); cordAccuracy.setText(""); dateCollected.setText(""); collectors.setText(""); elevation.setText(""); elevAccuracy.setText("");depth.setText("");
+                depthAccuracy.setText("");imgNameTxt.setText("");imgPreviewTxt.setVisibility(View.INVISIBLE);IVPreviewImage.setImageResource(0);
+            }
+        });
+    }
+
+    //Get specific location details to auto fill the form
+    public void getLocationDetails(){
+        Geocoder geocoder = new Geocoder(this);
+        try {
+            List<Address>addresses = geocoder.getFromLocation(latitude_i = final_loc.getLatitude(),longitude_i = final_loc.getLongitude(),1);
+            if (geocoder.isPresent()) {
+                StringBuilder stringBuilder = new StringBuilder();
+                if (addresses.size()>0) {
+                    Address returnAddress = addresses.get(0);
+
+                    /*
+                    Other Options
+                    String _localityString = returnAddress.getLocality();
+                    String _name = returnAddress.getFeatureName();
+                    String _subLocality = returnAddress.getSubLocality();
+                    String _zipcode = returnAddress.getPostalCode();
+                    */
+
+                    String _country = returnAddress.getCountryName();
+                    country.setText(_country);
+
+                    String _region_code = returnAddress.getCountryCode();
+                    region_Country.setText(_region_code);
+
+                    String _state = returnAddress.getAdminArea();
+                    province_State.setText(_state);
+                }
+            } else {
+
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
