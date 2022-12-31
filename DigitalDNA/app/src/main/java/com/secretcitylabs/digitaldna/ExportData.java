@@ -45,7 +45,6 @@ public class ExportData extends AppCompatActivity {
         setContentView(R.layout.activity_export_data);
         getSupportActionBar().hide();
 
-
         exportDatabase = new DatabaseHelper(this);
 
         arr_SampleID = new ArrayList<>();
@@ -56,7 +55,6 @@ public class ExportData extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //displayData();
-
 
         dbContentsTextView = findViewById(R.id.scrollViewTextView);
         dbCountTextView = findViewById(R.id.dbEntryCountTxtView);
@@ -93,10 +91,6 @@ public class ExportData extends AppCompatActivity {
 
         //Get info from database and populate the scroll view
         getDatabaseEntries();
-    }
-
-    private void displayData() {
-
     }
 
     //Show database contents
