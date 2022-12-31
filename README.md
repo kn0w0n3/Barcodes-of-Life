@@ -2,7 +2,7 @@
 DNA Barcoding Helper App  
 
 ## Input Data  
-Location data is obtained automatically and populate in the form.  
+Location data is obtained and populated in the form automatically. 
 ![DigitalDNA_GUI_12-31-22](https://user-images.githubusercontent.com/22214754/210152670-321cccfa-be72-4ebd-ad20-37069b3fbde6.gif)  
 
 ## View Map
