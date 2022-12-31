@@ -1,7 +1,9 @@
 # Digital DNA   
 DNA Barcoding Helper App  
 
-![DigitalDNA_GUI_12-31-22](https://user-images.githubusercontent.com/22214754/210152670-321cccfa-be72-4ebd-ad20-37069b3fbde6.gif)                     
+![DigitalDNA_GUI_12-31-22](https://user-images.githubusercontent.com/22214754/210152670-321cccfa-be72-4ebd-ad20-37069b3fbde6.gif)  
+
+![DigitalDNA_GUI_MAP_12-31-22](https://user-images.githubusercontent.com/22214754/210152958-dc4e5007-0f71-43e6-926d-69e78ed9d3c1.gif)  
 
 The goal of this project is to provide an interface that will allow users to store the required information about a specimen and retrieve it later for further processing, analysis, and submission to the BOLD database.  
 
