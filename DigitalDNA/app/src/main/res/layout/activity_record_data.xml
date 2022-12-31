@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/recordDataScrollView"
-    android:layout_width="409dp"
-    android:layout_height="729dp"
-    android:background="@drawable/plain_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/plain_bg_2"
+    android:fillViewport="true"
     tools:ignore="NamespaceTypo"
     tools:layout_editor_absoluteX="1dp"
-    tools:layout_editor_absoluteY="1dp"
-    android:fillViewport="true">
+    tools:layout_editor_absoluteY="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -250,7 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
-            android:text="Tissue Descriptor:"
+            android:text="Tissue Descript:"
             android:textColor="#FDFDFD"
             app:layout_constraintEnd_toEndOf="@+id/textView43"
             app:layout_constraintHorizontal_bias="1.0"

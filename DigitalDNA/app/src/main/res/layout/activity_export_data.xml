@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/plain_bg"
+    android:background="@drawable/plain_bg_2"
     android:foregroundTint="#FFFFFF"
     tools:context=".ExportData">
 
@@ -72,12 +72,13 @@
         android:layout_height="43dp"
         android:backgroundTint="@android:color/holo_green_dark"
         android:text="Export"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.815" />
+        app:layout_constraintVertical_bias="0.818" />
 
     <ImageView
         android:id="@+id/scrollViewBorder"
