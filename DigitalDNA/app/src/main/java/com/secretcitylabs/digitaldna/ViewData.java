@@ -88,7 +88,7 @@ public class ViewData extends AppCompatActivity {
                             buffer.append("Coord Accuracy: " + res.getString(30) + "\n");buffer.append("Date Collected: " + res.getString(31) + "\n");
                             buffer.append("Collectors: " + res.getString(32) + "\n"); buffer.append("Elevation: " + res.getString(33) + "\n");
                             buffer.append("Elev Accuracy: " + res.getString(34) + "\n"); buffer.append("Depth: " + res.getString(35) + "\n");
-                            buffer.append("Depth Accuracy: " + res.getString(36) + "\n\n");
+                            buffer.append("Depth Accuracy: " + res.getString(36) + "\n"); buffer.append("Image Name: " + res.getString(38) + "\n\n");
                         }
                         //Show all Data
                         showMessage("Data", buffer.toString());
@@ -164,7 +164,7 @@ public class ViewData extends AppCompatActivity {
                                 buffer.append("Coord Accuracy: " + res.getString(30) + "\n");buffer.append("Date Collected: " + res.getString(31) + "\n");
                                 buffer.append("Collectors: " + res.getString(32) + "\n"); buffer.append("Elevation: " + res.getString(33) + "\n");
                                 buffer.append("Elev Accuracy: " + res.getString(34) + "\n"); buffer.append("Depth: " + res.getString(35) + "\n");
-                                buffer.append("Depth Accuracy: " + res.getString(36) + "\n\n");
+                                buffer.append("Depth Accuracy: " + res.getString(36) + "\n"); buffer.append("Image Name: " + res.getString(38) + "\n\n");
                             }
                             //Show all Data
                             showMessage("Requested Data", buffer.toString());
@@ -231,7 +231,7 @@ public class ViewData extends AppCompatActivity {
             buffer.append("Coord Accuracy: " + res.getString(30) + "\n");buffer.append("Date Collected: " + res.getString(31) + "\n");
             buffer.append("Collectors: " + res.getString(32) + "\n"); buffer.append("Elevation: " + res.getString(33) + "\n");
             buffer.append("Elev Accuracy: " + res.getString(34) + "\n"); buffer.append("Depth: " + res.getString(35) + "\n");
-            buffer.append("Depth Accuracy: " + res.getString(36) + "\n\n");
+            buffer.append("Depth Accuracy: " + res.getString(36) + "\n"); buffer.append("Image Name: " + res.getString(38) + "\n\n");
         }
         //Show requested Data
         showMessage("Requested Data", buffer.toString());
