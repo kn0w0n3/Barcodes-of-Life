@@ -3,7 +3,7 @@ DNA Barcoding Helper App
 
 ## Input Data  
 Location data is obtained and populated in the form automatically. 
-![DigitalDNA_GUI_12-31-22](https://user-images.githubusercontent.com/22214754/210152670-321cccfa-be72-4ebd-ad20-37069b3fbde6.gif)  
+![DigitalDNA_GUI_Tour_1-2-2023](https://user-images.githubusercontent.com/22214754/210271645-9ad23235-8bc1-4237-8a01-3a50f9dd4b08.gif)  
 
 ## Export Data
 Export items from the database to CSV format. The CSV file can be sent via e-mail.  
