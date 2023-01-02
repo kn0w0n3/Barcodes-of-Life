@@ -209,7 +209,7 @@ public class RecordData extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                       boolean isInserted =  inputDatabase.insertData(sampleID.getText().toString(), fieldID.getText().toString(),museumID.getText().toString(),
+                       boolean isInserted =  inputDatabase.insertData(sampleID.getText().toString(), fieldID.getText().toString(), museumID.getText().toString(),
                                collectionCode.getText().toString(), depositIn.getText().toString(), phylum.getText().toString(), subfamily.getText().toString(),
                                classTxt.getText().toString(), order.getText().toString(), family.getText().toString(), genus.getText().toString(),
                                species.getText().toString(), subspecies.getText().toString(), binId.getText().toString(), vStatus.getText().toString(),
@@ -263,12 +263,13 @@ public class RecordData extends AppCompatActivity {
                             buffer.append("Reproduction: " + res.getString(18) + "\n"); buffer.append("Sex: " + res.getString(19) + "\n");
                             buffer.append("Life Stage: " + res.getString(20) + "\n"); buffer.append("Detailed Note: " + res.getString(21) + "\n");
                             buffer.append("Country: " + res.getString(22) + "\n"); buffer.append("Province/State: " + res.getString(23) + "\n");
-                            buffer.append("Sector: " + res.getString(24) + "\n"); buffer.append("Exact Site: " + res.getString(25) + "\n");
-                            buffer.append("Latitude: " + res.getString(26) + "\n"); buffer.append("Longitude: " + res.getString(27) + "\n");
-                            buffer.append("Coord Source: " + res.getString(28) + "\n"); buffer.append("Coord Accuracy: " + res.getString(29) + "\n");
-                            buffer.append("Date Collected: " + res.getString(30) + "\n"); buffer.append("Collectors: " + res.getString(31) + "\n");
-                            buffer.append("Elevation: " + res.getString(32) + "\n"); buffer.append("Elev Accuracy: " + res.getString(33) + "\n");
-                            buffer.append("Depth: " + res.getString(34) + "\n"); buffer.append("Depth Accuracy: " + res.getString(35) + "\n\n");
+                            buffer.append("Province/State: " + res.getString(24) + "\n"); buffer.append("Sector: " + res.getString(25) + "\n");
+                            buffer.append("Exact Site: " + res.getString(26) + "\n");buffer.append("Latitude: " + res.getString(27) + "\n");
+                            buffer.append("Longitude: " + res.getString(28) + "\n");buffer.append("Coord Source: " + res.getString(29) + "\n");
+                            buffer.append("Coord Accuracy: " + res.getString(30) + "\n");buffer.append("Date Collected: " + res.getString(31) + "\n");
+                            buffer.append("Collectors: " + res.getString(32) + "\n"); buffer.append("Elevation: " + res.getString(33) + "\n");
+                            buffer.append("Elev Accuracy: " + res.getString(34) + "\n"); buffer.append("Depth: " + res.getString(35) + "\n");
+                            buffer.append("Depth Accuracy: " + res.getString(36) + "\n\n");
                         }
                         //Show all Data
                         showMessage("Data", buffer.toString());

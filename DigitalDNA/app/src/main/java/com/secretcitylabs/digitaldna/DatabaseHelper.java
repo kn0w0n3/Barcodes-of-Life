@@ -154,6 +154,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stringCount;
     }
 
+    public Cursor getAllLatitudeCords(){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor resLat = sqLiteDatabase.rawQuery("select c_latitude from " + TABLE_NAME, null);
+        return resLat;
+    }
+
+    public Cursor getAllLongitudeCords(){
+        SQLiteDatabase sqLiteDatabaseZ = this.getWritableDatabase();
+        Cursor resLon = sqLiteDatabaseZ.rawQuery("select c_longitude from " + TABLE_NAME, null);
+        return resLon;
+    }
+
     //Export the contents of the database to a CSV file
     public void exportDB_CSV() {
         //Get the current date to include in the file name

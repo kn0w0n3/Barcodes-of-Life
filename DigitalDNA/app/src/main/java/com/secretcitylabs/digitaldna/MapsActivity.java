@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -26,12 +27,19 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.secretcitylabs.digitaldna.databinding.ActivityMapsBinding;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int Request_Code = 101;
     private double lat, lng;
+    int counter = 0;
+    //public String[] dbLatCoordinates;
+   // ArrayList<String> dbLatCoordinates;
+    ArrayList<String> dbLonCoordinates;
+    DatabaseHelper mapsDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.getApplicationContext());
+        mapsDatabaseHelper = new DatabaseHelper(this);
+        ArrayList<String> dbLatCoordinates = new ArrayList<>();
 
         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -58,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //plotSpecimenLocations();
         getCurrentLocation();
     }
 
@@ -107,7 +118,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     lng = location.getLongitude();
                     LatLng latlng = new LatLng(lat,lng);
                     mMap.addMarker(new MarkerOptions().position(latlng).title("Current Location"));
+                    plotSpecimenLocations();
+
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+                    //plotSpecimenLocations();
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15));
                 }
             }
@@ -125,5 +139,105 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 break;
         }
+    }
+
+    public void plotSpecimenLocations(){
+        Cursor resLat = mapsDatabaseHelper.getAllData();
+
+        if(resLat.getCount() == 0){
+            //Show message
+            //showMessage("Error", "No data to display");
+            Toast.makeText(getApplicationContext(), "No lat coordinates", Toast.LENGTH_LONG).show();
+            return;
+        }
+       // ArrayList<String> dbLatCoordinates = new ArrayList<>();
+        ArrayList<String> listLat = new ArrayList<String>();
+        while(resLat.moveToNext()){
+            //String lAT =
+            listLat.add(counter, resLat.getString(27));
+
+            //dbLatCoordinates.add(resLat.getString(27));
+           // Toast.makeText(getApplicationContext(), " lat coordinate is: " + resLat.getString(27), Toast.LENGTH_LONG).show();
+            counter++;
+        }
+        counter = 0;
+
+        Cursor resLon = mapsDatabaseHelper.getAllData();
+        if(resLon.getCount() == 0){
+            //Show message
+            //showMessage("Error", "No data to display");
+            //Toast.makeText(getApplicationContext(), "No lon coordinates", Toast.LENGTH_LONG).show();
+            return;
+        }
+        // ArrayList<String> dbLatCoordinates = new ArrayList<>();
+        ArrayList<String> listLon = new ArrayList<String>();
+        while(resLon.moveToNext()){
+            //String lAT =
+          listLon.add(counter, resLon.getString(28));
+
+            //dbLatCoordinates.add(resLat.getString(27));
+            //Toast.makeText(getApplicationContext(), " lon coordinate is: " + resLon.getString(28), Toast.LENGTH_LONG).show();
+            counter++;
+            //Toast.makeText(getApplicationContext(), " The counter is: " + counter, Toast.LENGTH_LONG).show();
+        }
+        counter = 0;
+
+        for (String s: listLat) {
+            if(s.equals("")){
+                //Toast.makeText(getApplicationContext(), "The text is: " + s, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "The text was empty: " + counter, Toast.LENGTH_LONG).show();
+                counter++;
+            }
+            else {
+                //Toast.makeText(getApplicationContext(), "Trying to add marker: " + counter, Toast.LENGTH_LONG).show();
+                LatLng latlng = new LatLng(Double.parseDouble(s), Double.parseDouble(listLon.get(counter)));
+                mMap.addMarker(new MarkerOptions().position(latlng).title("Specimen ID" + counter));
+                counter++;
+            }
+        }
+        counter = 0;
+
+            //String d_Lat = s;
+            //Toast.makeText(getApplicationContext(), "DLat cord is: " + s, Toast.LENGTH_LONG).show();
+            //String d_Lon = listLon.get(counter);
+           // Toast.makeText(getApplicationContext(), "DLat cord is: " + listLon.get(counter), Toast.LENGTH_LONG).show();
+            //String dynamicString = "dynamicString" + String.valueOf(counter);
+           //
+            //mMap.addMarker(new MarkerOptions().position(latlng).title("Specimen ID"));
+           // counter++;
+            //Toast.makeText(getApplicationContext(), "Counter number is : " + counter, Toast.LENGTH_LONG).show();
+
+            // Toast.makeText(getApplicationContext(), "Lat cord is: " + s, Toast.LENGTH_LONG).show();
+
+           // }
+        //counter = 0;
+        //counter = 0;
+        /*
+        Cursor resLon = mapsDatabaseHelper.getAllLongitudeCords();
+        if(resLon.getCount() == 0){
+            //Show message
+            //showMessage("Error", "No data to display");
+            Toast.makeText(getApplicationContext(), "No lat coordinates", Toast.LENGTH_LONG).show();
+            return;
+        }
+        //ArrayList<String> dbLonCoordinates = new ArrayList<>();
+        while(resLon.moveToNext()){
+            dbLonCoordinates.add(resLon.getString(27));
+
+        }
+
+         */
+        //for (String s: dbLatCoordinates) {
+
+            //String d_Lat = s;
+           // String d_Lon = dbLonCoordinates.get(counter);
+            //LatLng latlng = new LatLng(Double.parseDouble(d_Lat), Double.parseDouble(d_Lon));
+           // mMap.addMarker(new MarkerOptions().position(latlng).title("Specimen ID"));
+           // counter++;
+           // Toast.makeText(getApplicationContext(), "Lat cord is: " + s, Toast.LENGTH_LONG).show();
+
+        //}
+        //counter = 0;
+        //mMap.addMarker(new MarkerOptions().position(latlng).title("Current Location"));
     }
 }
