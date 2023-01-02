@@ -11,7 +11,7 @@ Export items from the database to CSV format. The CSV file can be sent via e-mai
 
 ## View Map
 View current location on the map as well as the collection site of each entry in the databse.  
-![DigitalDNA_GUI_MAP_12-31-22](https://user-images.githubusercontent.com/22214754/210152958-dc4e5007-0f71-43e6-926d-69e78ed9d3c1.gif)   
+![DigitalDNA_Maps_GUI_12-2-2023](https://user-images.githubusercontent.com/22214754/210270673-2a928797-10b2-4d16-9da1-f2c5fa7c1de6.gif)     
 
 The goal of this project is to provide an interface that will allow users to store the required information about a specimen and retrieve it later for further processing, analysis, and submission to the BOLD database.  
 
