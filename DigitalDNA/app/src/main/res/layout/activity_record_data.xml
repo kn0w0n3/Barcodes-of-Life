@@ -6,7 +6,7 @@
     android:id="@+id/recordDataScrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/plain_bg_2"
+    android:background="@drawable/t_bg_4"
     android:fillViewport="true"
     tools:ignore="NamespaceTypo"
     tools:layout_editor_absoluteX="1dp"
