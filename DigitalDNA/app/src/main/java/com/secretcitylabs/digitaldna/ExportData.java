@@ -64,13 +64,13 @@ public class ExportData extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 exportDatabase.exportDB_CSV();
-                Toast.makeText(getApplicationContext(), "Exporting to CSV.....", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Exporting to CSV", Toast.LENGTH_LONG).show();
             }
         });
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
-        // Spinner Drop down elements
+        //Spinner Drop down elements
         List<String> formats = Arrays.asList(" Select Format", "CSV");
 
         //https://www.youtube.com/watch?v=N8GfosWTt44

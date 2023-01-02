@@ -69,16 +69,16 @@
     <Button
         android:id="@+id/exportDataButton"
         android:layout_width="100dp"
-        android:layout_height="43dp"
+        android:layout_height="55dp"
         android:backgroundTint="@android:color/holo_green_dark"
         android:text="Export"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintVertical_bias="0.733" />
 
     <ImageView
         android:id="@+id/scrollViewBorder"
@@ -95,28 +95,29 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="210dp"
-        android:layout_height="25dp"
+        android:layout_width="174dp"
+        android:layout_height="27dp"
         android:backgroundTint="#FFFFFF"
         android:dropDownSelector="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.616"
+        app:layout_constraintHorizontal_bias="0.610"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.617" />
+        app:layout_constraintVertical_bias="0.632" />
 
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="210dp"
         android:layout_height="25dp"
         android:backgroundTint="#FFFEFE"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.616"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.701" />
+        app:layout_constraintVertical_bias="0.936" />
 
     <ImageView
         android:id="@+id/imageView4"

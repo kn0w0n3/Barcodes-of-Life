@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,6 +24,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+    public String userRequestedId;
+    public String numOfEntriesToReturn;
     public final static String DATABASE_NAME = "specimen_data.db";
     public final static String TABLE_NAME = "user_input_table";
 
@@ -133,9 +137,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    //Get db entry by id
+    public Cursor getEntryById(String id){
+        userRequestedId = id;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res2 = sqLiteDatabase.rawQuery("select * from user_input_table WHERE id  = " + userRequestedId,null);
+        return res2;
+    }
+
+    //Get the number of entries in the database
+    public String getDatabaseEntryCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, TABLE_NAME);
+        String stringCount = String.valueOf(count);
+        db.close();
+        return stringCount;
+    }
+
     //Export the contents of the database to a CSV file
     public void exportDB_CSV() {
-
         //Get the current date to include in the file name
         Date currentDate = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
@@ -177,5 +197,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         catch(Exception sqlEx) {
             Log.e("DatabaseHelper", sqlEx.getMessage(), sqlEx);
         }
+    }
+
+    public Cursor getSpecifiedNumOfEntries(String numberOfEntries){
+        numOfEntriesToReturn = numberOfEntries;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res3 = sqLiteDatabase.rawQuery("select * from user_input_table WHERE id <= " + numberOfEntries,null);
+        return res3;
     }
 }
