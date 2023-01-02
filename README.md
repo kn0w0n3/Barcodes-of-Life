@@ -7,7 +7,7 @@ Location data is obtained and populated in the form automatically.
 
 ## Export Data
 Export items from the database to CSV format. The CSV file can be sent via e-mail.  
-![DigitalDNA_GUI_Export_File_12-31-22](https://user-images.githubusercontent.com/22214754/210153035-fcb91b10-44d7-4037-89b7-e9a2fd3ed6f1.gif)  
+![DigitalDNA_GUI_Export_File_12-31-22](https://user-images.githubusercontent.com/22214754/210271119-4cc4301e-1ef0-44ba-b602-8a7401c18fee.gif)   
 
 ## View Map
 View current location on the map as well as the collection site of each entry in the databse.  
