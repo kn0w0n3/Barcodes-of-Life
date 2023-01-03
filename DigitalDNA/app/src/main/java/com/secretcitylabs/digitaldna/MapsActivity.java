@@ -182,6 +182,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         counter = 0;
 
+
+        Cursor resSpecimenId = mapsDatabaseHelper.getAllData();
+        if(resSpecimenId.getCount() == 0){
+            //Show message
+            //showMessage("Error", "No data to display");
+            //Toast.makeText(getApplicationContext(), "No lon coordinates", Toast.LENGTH_LONG).show();
+            return;
+        }
+        // ArrayList<String> dbLatCoordinates = new ArrayList<>();
+        ArrayList<String> specimenIds = new ArrayList<String>();
+        while(resSpecimenId.moveToNext()){
+            //String lAT =
+            specimenIds.add(counter, resSpecimenId.getString(1));
+
+            //dbLatCoordinates.add(resLat.getString(27));
+            //Toast.makeText(getApplicationContext(), " lon coordinate is: " + resLon.getString(28), Toast.LENGTH_LONG).show();
+            counter++;
+            //Toast.makeText(getApplicationContext(), " The counter is: " + counter, Toast.LENGTH_LONG).show();
+        }
+        counter = 0;
+
+
         for (String s: listLat) {
             if(s.equals("")){
                 //Toast.makeText(getApplicationContext(), "The text is: " + s, Toast.LENGTH_LONG).show();
@@ -191,7 +213,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             else {
                 //Toast.makeText(getApplicationContext(), "Trying to add marker: " + counter, Toast.LENGTH_LONG).show();
                 LatLng latlng = new LatLng(Double.parseDouble(s), Double.parseDouble(listLon.get(counter)));
-                mMap.addMarker(new MarkerOptions().position(latlng).title("Specimen ID" + counter));
+                mMap.addMarker(new MarkerOptions().position(latlng).title("Specimen ID: " + specimenIds.get(counter)));
                 counter++;
             }
         }
