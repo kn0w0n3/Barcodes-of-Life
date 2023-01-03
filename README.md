@@ -33,5 +33,12 @@ https://developer.android.com/studio
 https://www.sqlite.org/index.html    
 https://sqlitestudio.pl/
 
-# **IDE:**  
-![androidstudio](https://user-images.githubusercontent.com/22214754/209419249-7c587875-f300-4b50-bb72-2658750240bf.png)  
+# **Work Environment:**  
+![Android_Studio_Dolphin_2](https://user-images.githubusercontent.com/22214754/210298276-6b4b3644-a6de-4faf-be2e-ef5b350f0640.png) 
+
+Android Studio Dolphin | 2021.3.1 Patch 1  
+
+Build #AI-213.7172.25.2113.9123335, built on September 29, 2022  
+
+Runtime version: 11.0.13+0-b1751.21-8125866 amd64  
+VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.  
