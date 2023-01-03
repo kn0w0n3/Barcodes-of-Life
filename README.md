@@ -23,16 +23,6 @@ https://v3.boldsystems.org/index.php/resources/handbook?chapter=3_submissions.ht
 ![2](https://user-images.githubusercontent.com/22214754/208317704-60d88e29-51cc-4a06-910e-c537af146cab.PNG)
 ![3](https://user-images.githubusercontent.com/22214754/208317706-b52d70af-6eb8-47b9-bc5a-05db276d4f42.PNG) 
 
-# **Resources:**  
-https://ibol.org/  
-https://www.boldsystems.org/  
-https://developer.android.com/studio  
-
-# **Database:**        
-![sqlitefg](https://user-images.githubusercontent.com/22214754/179894516-3059e142-fb38-40bc-a32c-65500a223eb1.png)    
-https://www.sqlite.org/index.html    
-https://sqlitestudio.pl/
-
 # **Work Environment:**  
 ![Android_Studio_Dolphin_2](https://user-images.githubusercontent.com/22214754/210298276-6b4b3644-a6de-4faf-be2e-ef5b350f0640.png) 
 
@@ -42,3 +32,15 @@ Build #AI-213.7172.25.2113.9123335, built on September 29, 2022
 
 Runtime version: 11.0.13+0-b1751.21-8125866 amd64  
 VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.  
+
+# **Database:**        
+![sqlitefg](https://user-images.githubusercontent.com/22214754/179894516-3059e142-fb38-40bc-a32c-65500a223eb1.png)    
+https://www.sqlite.org/index.html    
+https://sqlitestudio.pl/  
+
+# **Resources:**  
+https://ibol.org/  
+https://www.boldsystems.org/  
+https://developer.android.com/studio  
+https://developers.google.com/maps 
+https://developers.google.com/maps/documentation/elevation/start  
