@@ -42,5 +42,5 @@ https://sqlitestudio.pl/
 https://ibol.org/  
 https://www.boldsystems.org/  
 https://developer.android.com/studio  
-https://developers.google.com/maps 
-https://developers.google.com/maps/documentation/elevation/start  
+https://developers.google.com/maps   
+https://developers.google.com/maps/documentation/elevation/start    
