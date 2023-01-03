@@ -1,19 +1,19 @@
 # Digital DNA   
 DNA Barcoding Helper App  
 
+The goal of this project is to provide an interface that will allow users to store the required information about a specimen and retrieve it later for further processing, analysis, and submission to the BOLD database.  
+
 ## Input Data  
 Location data is obtained and populated in the form automatically. 
-![DigitalDNA_GUI_12-31-22](https://user-images.githubusercontent.com/22214754/210152670-321cccfa-be72-4ebd-ad20-37069b3fbde6.gif)  
+![DigitalDNA_GUI_Tour_1-2-2023](https://user-images.githubusercontent.com/22214754/210271645-9ad23235-8bc1-4237-8a01-3a50f9dd4b08.gif)  
 
 ## Export Data
 Export items from the database to CSV format. The CSV file can be sent via e-mail.  
-![DigitalDNA_GUI_Export_File_12-31-22](https://user-images.githubusercontent.com/22214754/210153035-fcb91b10-44d7-4037-89b7-e9a2fd3ed6f1.gif)  
+![DigitalDNA_Export_Data_GUI_12-2-2023](https://user-images.githubusercontent.com/22214754/210271240-a5521a95-f1a7-431f-b8b4-2bf398760588.gif)       
 
 ## View Map
-View current location on the map as well as the collection site of each entry in the databse.  
-![DigitalDNA_GUI_MAP_12-31-22](https://user-images.githubusercontent.com/22214754/210152958-dc4e5007-0f71-43e6-926d-69e78ed9d3c1.gif)   
-
-The goal of this project is to provide an interface that will allow users to store the required information about a specimen and retrieve it later for further processing, analysis, and submission to the BOLD database.  
+View current location on the map as well as the collection site of each entry in the database.  
+![DigitalDNA_Maps_GUI_12-2-2023](https://user-images.githubusercontent.com/22214754/210270673-2a928797-10b2-4d16-9da1-f2c5fa7c1de6.gif)     
 
 # Submissions to BOLD  
 Instructions for making submissions to the BOLD system can be found at the following link:  
