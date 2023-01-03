@@ -26,6 +26,7 @@ https://v3.boldsystems.org/index.php/resources/handbook?chapter=3_submissions.ht
 # **Resources:**  
 https://ibol.org/  
 https://www.boldsystems.org/  
+https://developer.android.com/studio  
 
 # **Database:**        
 ![sqlitefg](https://user-images.githubusercontent.com/22214754/179894516-3059e142-fb38-40bc-a32c-65500a223eb1.png)    
